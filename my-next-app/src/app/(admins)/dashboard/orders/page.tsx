@@ -3,8 +3,8 @@
 import React, { useMemo } from 'react';
 import { MRT_Cell, MRT_ColumnDef } from 'material-react-table';
 import { Select, MenuItem } from '@mui/material';
-import { Box, IconButton } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Box } from '@mui/material';
+import OrderDetailsModal from '@/components/OrderDetailsModal';
 
 import {
     MaterialReactTable,
@@ -96,10 +96,7 @@ function page() {
                 accessorKey: 'toppings',
                 Cell: ({ row }: {row: { original: Order}}) => (
                     <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
-                        <IconButton size="small" className="text-orange2">
-                            <VisibilityIcon fontSize="small" />
-                            <p className='text-sm ml-1'>Toppings</p>
-                        </IconButton>
+                        <OrderDetailsModal />
                         {/* <span>{row.original.toppings}</span> */}
                     </Box>
                 ),
@@ -144,6 +141,7 @@ function page() {
         [],
     );
     const table = useMaterialReactTable({
+        
         columns,
         data,
         enableGlobalFilter: true,
