@@ -14,7 +14,7 @@ function Footer() {
             <p>Terms and Conditions</p>
           </div>
           <div className="mt-5">
-              <Stack direction="row" spacing={2} justifyContent="center" className="mb-20">
+              <Stack direction="row" spacing={2} justifyContent="center" className="mb-10">
                     {/* Facebook */}
                     <IconButton
                       aria-label="facebook"

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Featured from "@/components/Featured";
-import Review from "@/components/Review";
+import TopRestaurant from "@/components/TopRestaurant";
 import Pizza from "@/components/Pizza";
 import Link from "next/link";
 import { TextField, InputAdornment, IconButton, Stack } from '@mui/material';
@@ -14,21 +14,21 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-[#FFF8F1]">
+    <div className="bg-background">
       <div className="bg-custom-gradient">
         <Navbar />
         <Hero />
       </div>
 
-        <h3 className='text-gray3 ml-'>Featured pizzas</h3>
+        <h3 className='text-gray3 ml-3'>Featured pizzas</h3>
         <Featured />
 
         <h3 className="text-gray3 mt-10 ml-3">Top Restaurants</h3>
         <div className="flex overflow-scroll bg-custom-gradient mb-20">
-          <Review />
-          <Review />
-          <Review />
-          <Review />
+          <TopRestaurant />
+          <TopRestaurant />
+          <TopRestaurant />
+          <TopRestaurant />
         </div>
 
         <h3 className="text-gray3 mt-10 ml-3">Popular pizzas</h3>
@@ -49,8 +49,8 @@ export default function Home() {
 
         <div className="mt-20 bg-[#CCB691] flex">
           <div className="flex flex-col w-[50vw] ml-7 mt-7">
-            <Link href="#" className="p-1 font-sans font-semibold">Home</Link>
-            <Link href="#" className="p-1 font-sans font-semibold">Order</Link>
+            <Link href="/" className="p-1 font-sans font-semibold">Home</Link>
+            <Link href="/history" className="p-1 font-sans font-semibold">Order</Link>
             <Link href="#" className="p-1 font-sans font-semibold">About us</Link>
           </div>
           <div>
@@ -65,8 +65,6 @@ export default function Home() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        edge="end"
-                        // color="primary"
                         >
                           <SendIcon style={{ color: '#FF6F00' }} />
                         </IconButton>
@@ -78,6 +76,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
         <Footer />
         
       </div>

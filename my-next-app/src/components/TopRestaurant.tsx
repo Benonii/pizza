@@ -4,9 +4,9 @@ import Image from 'next/image';
 import profilePic from '@/../public/assets/images/profile.jpg';
 import batteryIcon from '@/../public/assets/images/icon-1.png'
 
-function Review() {
+function TopRestaurant() {
   return (
-    <div className='relative flex rounded-lg bg-white mx-3 min-w-[340px] max-h-[160px]'>
+    <div className='relative flex shadow-md rounded-2xl bg-white mx-3 min-w-[340px] max-h-[160px]'>
       <div className='w-[60%]'>
         <div className="flex items-center mt-3 ml-3">
           <Image src={profilePic} alt="Profile" />
@@ -27,4 +27,4 @@ function Review() {
   )
 }
 
-export default Review
+export default TopRestaurant;
