@@ -7,16 +7,10 @@ import { styled } from '@mui/system';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import RelatedPizza from './RelatedPizza';
 import OrderCompleteModal from './OrderCompleteModal';
-
+import OrangeCheckbox from './OrangeCheckbox';
 
 import pizzaImg1 from '@/../public/assets/images/pizza-1.png';
 import pizzaImg2 from '@/../public/assets/images/pizza-5.png';
-
-const OrangeCheckbox = styled(Checkbox)({
-    '&.Mui-checked': {
-        color: '#FF8100',
-    },
-});
 
 function OrderPizza() {
     const label = { inputProps: { 'aria-label': 'Toppings' } };
