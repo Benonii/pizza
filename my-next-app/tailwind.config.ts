@@ -24,11 +24,14 @@ const config: Config = {
         orange3: "#FF8C05",
         orange4: "#FF9921",
         orange5: "#FFA500",
+        orange6: "rgba(255, 129, 0, 0.05)",
 
         gray1: "#16120D",
         gray2: "#050505",
         gray3: "rgba(0, 0, 0, 0.5)",
         gray4: "#2F2F2F",
+        gray5: "#F8F8F8",
+        gray6: "#525256",
 
         green1: "rgba(0, 128, 0, 0.05)",
         green2: "#01C550",

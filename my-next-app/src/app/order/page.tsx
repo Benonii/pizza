@@ -1,5 +1,5 @@
-import OrderPizza from '@/components/OrderPizza'
-import React from 'react'
+import React from 'react';
+import OrderPizza from '@/components/OrderPizza';
 
 function page() {
   return (
