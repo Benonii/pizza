@@ -25,6 +25,7 @@ const config: Config = {
         orange4: "#FF9921",
         orange5: "#FFA500",
         orange6: "rgba(255, 129, 0, 0.05)",
+        orange7: "rgba(255, 153, 33, 0.5)",
 
         gray1: "#16120D",
         gray2: "#050505",

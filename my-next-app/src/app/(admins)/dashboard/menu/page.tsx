@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import OrangeCheckbox from '@/components/OrangeCheckbox';
 import UploadButton from '@/components/UploadFile';
 import Button from '@mui/material/Button';
+import PizzaUploadedModal from '@/components/PizzaUploadedModal';
 
 
 function page() {
@@ -51,7 +52,6 @@ function page() {
                     <OrangeCheckbox {...label} />
                 }
             />
-            <Button variant='contained' size='small' className='bg-orange2'>+ Add</Button>
         </div>
       </div>
       
@@ -62,8 +62,9 @@ function page() {
         <div className="w-[35vw] max-w-72 mt-5">
           <UploadButton />
         </div>
-
-      <Button variant='contained' className='bg-orange2 mt-5 w-[30vw] max-w-64 pt-5 pb-5 rounded-xl font-semibold'>Submit</Button>
+        <div className='flex justify-center items-center w-full mt-5'>
+          <PizzaUploadedModal />
+        </div>
     </div>
   )
 }
