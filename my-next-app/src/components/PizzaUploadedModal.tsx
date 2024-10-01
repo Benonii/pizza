@@ -28,7 +28,7 @@ export default function PizzaUploadedModal() {
 
   return (
     <div className=''>
-        <Button variant='contained' className='bg-orange2 w-[30vw] max-w-64 pt-5 pb-5 rounded-xl font-semibold' onClick={handleOpen}>
+        <Button  variant='contained' className='bg-orange2 w-[30vw] max-w-64 pt-5 pb-5 rounded-xl font-semibold' type='submit' onClick={handleOpen}>
             Submit
         </Button>
      

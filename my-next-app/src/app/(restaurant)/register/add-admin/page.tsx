@@ -98,7 +98,8 @@ function page() {
         if (data.success) {
           const { restaurantId } = data;
           setSuccess(data.message);
-          router.push('/dashboard');
+          localStorage.setItem('restaurantId', restaurantId);
+          router.push('/dashboard/orders');
         }
       } else {
           setError(data.error);
