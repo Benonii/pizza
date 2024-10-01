@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
@@ -12,22 +13,34 @@ import Button from '@mui/material/Button';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png'
 
 function page() {
-  const [email, setEmail] = useState<string>('');
-  const [ password, setPassword ] = useState<string>('');
+  const [ formData, setFormData ] = useState({
+    email: '',
+    password: ''
+  })
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevState) => ({...prevState, [e.target.name]: e.target.value}))
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formData)
     const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ 
+        email: formData.email,
+        password: formData.password
+      })
     });
 
     const data = await res.json();
     if (res.ok) {
       console.log(data.message);
+      router.push('/')
     } else {
       console.error(data.error);
     }
@@ -47,13 +60,18 @@ function page() {
           <div className="flex flex-col gap-3">
             <TextField
               label="Email address"
+              name='email'
+              onChange={handleChange}
              />
             <TextField
               label="Password"
+              name='password'
+              type='password'
+              onChange={handleChange}
              />
           </div>
           <FormControlLabel
-            label="I accept the Terms and Conditions"
+            label="Remember me"
             control={
                 <Checkbox {...label} />
             }
