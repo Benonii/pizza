@@ -1,4 +1,8 @@
+"use client";
+
 import React from 'react';
+import { useState } from 'react';
+
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -8,6 +12,26 @@ import Button from '@mui/material/Button';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png'
 
 function page() {
+  const [email, setEmail] = useState<string>('');
+  const [ password, setPassword ] = useState<string>('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      console.log(data.message);
+    } else {
+      console.error(data.error);
+    }
+  };
   const label = { inputProps: { 'aria-label': 'Terms and conditions' } };
   return (
     <div className='h-screen w-screen bg-white border border-red-500 flex justify-center'>
@@ -17,7 +41,7 @@ function page() {
           <h1 className='font-sans text-orange1 text-2xl font-semibold ml-2'>Pizza</h1>
         </div>
 
-        <div className=''>
+        <form onSubmit={handleSubmit} className=''>
           <h2 className='font-sans mt-3 text-2xl'>Sign in</h2>
           <hr className='mt-2 mb-5 border '/>
           <div className="flex flex-col gap-3">
@@ -37,10 +61,10 @@ function page() {
           />
 
           <div className="mt-5 flex justify-center">
-            <Button variant="contained" className='bg-orange2 w-[100%] font-semibold'>Sign in</Button>
+            <Button variant="contained" type='submit' className='bg-orange2 w-[100%] font-semibold'>Sign in</Button>
           </div>
 
-        </div>
+        </form>
       </div>
       
     </div>

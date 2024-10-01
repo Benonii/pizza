@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: pizza-postgres
+    environment:
+      POSTGRES_USER: pizza_dev
+      POSTGRES_PASSWORD: pizza_dev!4796
+      POSTGRES_DB: pizza_dev_db
+    volumes:
+      - ./data:/var/lib/postgresql/data   # Persist data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Initialize with your script
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
