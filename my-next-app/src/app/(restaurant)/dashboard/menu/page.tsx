@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import OrangeCheckbox from '@/components/OrangeCheckbox';
@@ -10,53 +10,99 @@ import PizzaUploadedModal from '@/components/PizzaUploadedModal';
 
 
 function page() {
+  const [ formData, setFormData ] = useState({
+    name: '',
+    price: '',
+  });
+
+  const availableToppings = ['Mozzarella', 'Tomato', 'Bell Peppers', 'Onions', 'Olives']
+  const [ toppings, setToppings ] = useState<string[]>([]);
+
+  const [ success, setSuccess ] = useState<string | null>(null);
+  const [ error, setError ] = useState<string | null>(null);
+  const [restaurantId, setRestaurantId] = useState<string | null>(null);
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedRestaurantId = localStorage.getItem('restaurantId');
+      setRestaurantId(storedRestaurantId);
+    }
+  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
+  }
+
+  const handleCheckboxChange = (topping: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!toppings.includes(topping)) {
+      setToppings(prevState => ([...prevState, topping]))
+    } else {
+      setToppings( prevState => (prevState.filter(value => value !== topping)))
+    }
+  }
+
   const label = { inputProps: { 'aria-label': 'Toppings' } };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSuccess(null);
+    setError(null);
+
+    const res = await fetch('/api/menu', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({...formData, toppings, restaurantId })
+    })
+
+    const data = await res.json()
+    if (res.ok) {
+      if (data.success) {
+        setSuccess('Pizza Created Successfully');
+      } else {
+        setSuccess("Failed to create Pizza");
+      }
+    } else {
+      console.log("Network error")
+    }
+  }
+
   return (
-    <div className='flex flex-col items-center w-full  h-screen bg-white'>
+    <form onSubmit={handleSubmit} className='flex flex-col items-center w-full  h-screen bg-white'>
       <div>
         <h1 className='font-sans text-2xl text-gray6 text-center mt-10 mb-5'>Add Menu</h1>
         <TextField
           label="Name"
+          name="name"
+          onChange={handleChange}
           className='w-[50vw] max-w-96'/>
+
       </div>
       <div className='mx-24 mt-5'>
         <h2 className='font-sans text-xl text-gray3 mt-2 mb-2'>Toppings</h2>
         <div className="flex flex-wrap mb-5">
-          <FormControlLabel
-                label="Mozzarella"
-                control={
-                    <OrangeCheckbox {...label} />
-                }
-            />
+          {availableToppings.map((topping) => (
             <FormControlLabel
-                label="Tomato"
-                control={
-                    <OrangeCheckbox {...label} />
-                }
+              key={topping}
+              label={topping}
+              control={
+                  <OrangeCheckbox 
+                    checked={toppings.includes(topping)}
+                    {...label} 
+                    onChange={handleCheckboxChange(topping)}
+                  />
+              }
             />
-            <FormControlLabel
-                label="Bell Peppers"
-                control={
-                    <OrangeCheckbox {...label} />
-                }
-            />
-            <FormControlLabel
-                label="Onions"
-                control={
-                    <OrangeCheckbox {...label} />
-                }
-            />
-            <FormControlLabel
-                label="Olives"
-                control={
-                    <OrangeCheckbox {...label} />
-                }
-            />
+          ))}
+          
         </div>
       </div>
       
       <TextField
         label="Price"
+        name="price"
+        onChange={handleChange}
         className='w-[50vw] max-w-96'
         />
         <div className="w-[35vw] max-w-72 mt-5">
@@ -65,7 +111,9 @@ function page() {
         <div className='flex justify-center items-center w-full mt-5'>
           <PizzaUploadedModal />
         </div>
-    </div>
+        {error && (<p className='text-red-600'>{error}</p>)}
+        {success && (<p className='text-green-600'>{success}</p>)}
+    </form>
   )
 }
 

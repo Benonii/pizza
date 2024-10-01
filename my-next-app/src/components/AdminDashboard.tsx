@@ -31,14 +31,14 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
       case '/dashboard/user':
         return 'User';
       default:
-        return 'Dashboard';
+        return 'Orders';
     }
   };
 
   const pageTitle = getPageTitle(pathname);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-screen">
       {/* Sidebar */}
       <div className="w-2/5 bg-sidebarBg shadow-lg bg-white">
         <div className="flex justify-between items-center mt-4 mb-4 mx-1 bg-[#F3F3F340]">

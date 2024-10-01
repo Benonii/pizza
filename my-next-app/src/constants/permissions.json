@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Update Order Status",
+      "action": "update",
+      "subject": "Order"
+    },
+    {
+      "name": "See Orders",
+      "action": "read",
+      "subject": "Order"
+    },
+    {
+      "name": "Add Users",
+      "action": "create",
+      "subject": "User"
+    },
+    {
+      "name": "See Customers",
+      "action": "read",
+      "subject": "Customer"
+    },
+    {
+      "name": "Create Roles",
+      "action": "create",
+      "subject": "Role"
+    }
+]
+  
