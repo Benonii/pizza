@@ -3,7 +3,11 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.1",
+    "@prisma/client": "^5.20.0",
     "@toolpad/core": "^0.7.0",
     "material-react-table": "^3.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.20.0"
   }
 }

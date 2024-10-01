@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id       Int                 @id @default(autoincrement())
+  name     String
+  menus    Menu[]
+  toppings RestaurantTopping[]
+  orders   Order[]
+  roles    Role[]
+}
+
+model Menu {
+  id            Int        @id @default(autoincrement())
+  restaurant_id Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+  pizza_id      Int
+  pizza         Pizza      @relation("PizzaMenu", fields: [pizza_id], references: [id])
+}
+
+model Pizza {
+  id     Int     @id @default(autoincrement())
+  name   String
+  price  Decimal @db.Decimal(10, 2)
+  menu   Menu[]  @relation("PizzaMenu")
+  orders Order[] @relation("PizzaOrder")
+}
+
+model Order {
+  id           Int         @id @default(autoincrement())
+  user_id      Int
+  user         User        @relation(fields: [user_id], references: [id])
+  pizza_id     Int
+  pizza        Pizza       @relation("PizzaOrder", fields: [pizza_id], references: [id])
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
+}
+
+model User {
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  password    String
+  location    String? // Optional field
+  phoneNumber String? // Optional field
+  createdAt   DateTime   @default(now())
+  Order       Order[]
+  Role        Role[]
+  UserRole    UserRole[]
+}
+
+model Role {
+  id            Int              @id @default(autoincrement())
+  restaurant_id Int
+  restaurant    Restaurant       @relation(fields: [restaurant_id], references: [id])
+  created_by    Int
+  creator       User             @relation(fields: [created_by], references: [id])
+  permissions   RolePermission[]
+  UserRole      UserRole[]
+}
+
+model RolePermission {
+  id      Int  @id @default(autoincrement())
+  role_id Int
+  role    Role @relation(fields: [role_id], references: [id])
+}
+
+model UserRole {
+  id      Int  @id @default(autoincrement())
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id])
+  role_id Int
+  role    Role @relation(fields: [role_id], references: [id])
+}
+
+model RestaurantTopping {
+  id            Int        @id @default(autoincrement())
+  restaurant_id Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+  topping_id    Int
+  topping       Topping    @relation(fields: [topping_id], references: [id])
+}
+
+model Topping {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  RestaurantTopping RestaurantTopping[]
+}
