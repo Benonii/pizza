@@ -8,12 +8,21 @@ datasource db {
 }
 
 model Restaurant {
-  id       Int                 @id @default(autoincrement())
-  name     String
-  menus    Menu[]
-  toppings RestaurantTopping[]
-  orders   Order[]
-  roles    Role[]
+  id           Int                 @id @default(autoincrement())
+  admin_name   String
+  admin        User                @relation("RestaurantAdmin", fields: [adminId], references: [id])
+  adminId      Int
+  name         String
+  email        String
+  password     String
+  phone_number String
+  location     String
+  menus        Menu[]
+  toppings     RestaurantTopping[]
+  admins       UserRole[]
+  roles        Role[]
+  Order        Order[]
+  User         User[]              @relation("RestaurantUsers")
 }
 
 model Menu {
@@ -43,15 +52,19 @@ model Order {
 }
 
 model User {
-  id          Int        @id @default(autoincrement())
-  email       String     @unique
-  password    String
-  location    String? // Optional field
-  phoneNumber String? // Optional field
-  createdAt   DateTime   @default(now())
-  Order       Order[]
-  Role        Role[]
-  UserRole    UserRole[]
+  id           Int          @id @default(autoincrement())
+  name         String
+  email        String       @unique
+  password     String
+  location     String? // Optional field
+  phone_number String? // Optional field
+  created_at   DateTime     @default(now())
+  Order        Order[]
+  Role         Role[]
+  UserRole     UserRole[]
+  Restaurant   Restaurant?  @relation("RestaurantUsers", fields: [restaurantId], references: [id])
+  restaurants  Restaurant[] @relation("RestaurantAdmin")
+  restaurantId Int?
 }
 
 model Role {
@@ -71,11 +84,13 @@ model RolePermission {
 }
 
 model UserRole {
-  id      Int  @id @default(autoincrement())
-  user_id Int
-  user    User @relation(fields: [user_id], references: [id])
-  role_id Int
-  role    Role @relation(fields: [role_id], references: [id])
+  id           Int         @id @default(autoincrement())
+  user_id      Int
+  user         User        @relation(fields: [user_id], references: [id])
+  role_id      Int
+  role         Role        @relation(fields: [role_id], references: [id])
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId Int?
 }
 
 model RestaurantTopping {
