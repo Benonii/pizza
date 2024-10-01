@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
+import { useRouter } from 'next/navigation';
 
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png'
 
@@ -20,6 +21,7 @@ function page() {
   const [success, setSuccess] = useState<string | null>(null);
 
   const label = { inputProps: { 'aria-label': 'Terms and conditions' } };
+  const router = useRouter();
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({...prevState, [e.target.name]: e.target.value}))
@@ -32,20 +34,27 @@ function page() {
 
     console.log('Form Data:', formData)
 
-    // const res = await fetch('/api/auth/signup', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({formData})
-    // });
+    
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password,
+        location: formData.location,
+        phoneNumber: formData.phoneNumber
+      })
+    });
 
-    // const data = await res.json();
-    // if (res.ok) {
-    //   setSuccess(data.message);
-    // } else {
-    //   setError(data.error);
-    // }
+    const data = await res.json();
+    if (res.ok) {
+      setSuccess(data.message);
+      router.push('/login');
+    } else {
+      setError(data.error);
+    }
   }
 
   return (
@@ -77,7 +86,7 @@ function page() {
             <TextField
               label="Confirm Password"
               type="password"
-              name='confirmPassword'
+              name=''
               onChange={handleChange}
              />
             <TextField
