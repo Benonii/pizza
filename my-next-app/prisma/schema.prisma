@@ -61,6 +61,8 @@ model User {
   restaurants  Restaurant[] @relation("RestaurantAdmin")
   restaurantId Int?
   Restaurant   Restaurant?  @relation(fields: [restaurantId], references: [id])
+  roleId       Int?
+  role         Role?        @relation("UserRole", fields: [roleId], references: [id]) // Link to the Role model
 }
 
 model Role {
@@ -70,6 +72,7 @@ model Role {
   actions      String[]
   restaurant   Restaurant @relation("RestaurantRoles", fields: [restaurantId], references: [id])
   restaurantId Int
+  users        User[]     @relation("UserRole") // This creates a relation field for users
 }
 
 model Permission {
