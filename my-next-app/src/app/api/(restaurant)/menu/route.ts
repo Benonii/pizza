@@ -17,7 +17,7 @@ export async function POST(request: Request) {
                 vendor: {
                     connect: { id: Number(restaurantId)}
                 },
-                toppings,
+                toppings
             } as Prisma.PizzaCreateInput
         })
 
