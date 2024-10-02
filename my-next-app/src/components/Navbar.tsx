@@ -23,8 +23,9 @@ function Navbar() {
       <div className='flex justify-around items-center w-[70%] ml-5 text-gray1'>
         <Link href="/" className={`${pathname === "/" ? "text-orange2" : ""} text-sm`}>Home</Link>
         <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-sm`}>Orders</Link>
+        <Link href="#" className={`hidden ${pathname === "/#" ? "text-orange2" : ""} text-sm md:block`}>Who we are</Link>
 
-        <MenuIcon />
+        <MenuIcon className='md:hidden' />
       </div>
 
       <div className="flex"></div>

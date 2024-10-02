@@ -28,7 +28,7 @@ export default function OrderCompleteModal() {
 
   return (
     <div className='w-[90%]'>
-      <Button variant='contained' className='bg-orange2 w-full' onClick={handleOpen}>
+      <Button type="submit" variant='contained' className='bg-orange2 w-full' onClick={handleOpen}>
         Order
       </Button>      
       <Modal

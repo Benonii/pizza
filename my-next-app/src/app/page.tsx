@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -10,9 +12,38 @@ import SendIcon from '@mui/icons-material/Send';
 
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 import Footer from "@/components/Footer";
+import { useEffect, useState } from "react";
 
-
+type PizzaType = {
+  id: number
+  name: string
+  toppings: string[]
+  price: string | number
+  restaurantId: number
+}
 export default function Home() {
+  const [ pizzas, setPizzas ] = useState<PizzaType[]>([]);
+
+  useEffect(() => {
+    const getPizzas = async () => {
+      try {
+        const response = await fetch('/api/pizzas');
+        if (!response.ok) {
+          throw new Error('Failed to fetch pizzas');
+        }
+        const pizzas = await response.json();
+        setPizzas(pizzas);
+      } catch (error) {
+        console.error('Error fetching pizzas:', error);
+        return [];
+      }
+    };
+
+    getPizzas();
+  }, []);
+
+  console.log('Pizzas:', pizzas);
+
   return (
     <div className="bg-background">
       <div className="bg-custom-gradient">
@@ -33,18 +64,17 @@ export default function Home() {
 
         <h3 className="text-gray3 mt-10 ml-3">Popular pizzas</h3>
         <div className="grid place-items-center gap-1">
-          <Pizza />
-          <Pizza />
-          <Pizza />
+            {pizzas.length > 0 && pizzas.map(pizza => (
+                <Pizza key={pizza.id} pizza={pizza} />
+            ))}
         </div>
 
+        
         <h3 className="text-gray3 mt-10 ml-3">Fasting pizzas</h3>
-        <div className="flex ml-5 gap-3 overflow-scroll">
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza />
-          <Pizza /> 
+        <div className="flex justify-center ml-5 gap-3 overflow-auto">
+            {pizzas.length > 0 && pizzas.map(pizza => (
+                <Pizza key={pizza.id} pizza={pizza} />
+            ))}
         </div>
 
         <div className="mt-20 bg-[#CCB691] flex">

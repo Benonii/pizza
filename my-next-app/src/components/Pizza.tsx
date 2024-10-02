@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
@@ -5,16 +7,31 @@ import Link from 'next/link';
 
 import pizzaPic from '@/../public/assets/images/pizza-4.png';
 import profilePic from '@/../public/assets/images/profile.jpg';
+import { useRouter } from 'next/navigation';
 
-function Pizza() {
+type Pizza = {
+    id: number
+    name: string
+    toppings: string[]
+    price: string | number
+    restaurantId: number
+  }
+
+interface PizzaProps {
+    pizza: Pizza
+}
+function Pizza({ pizza }: PizzaProps ) {
+    const router = useRouter();
   return (
     <div className='relative flex flex-col mt-3 shadow-lg rounded-xl min-w-[340px] bg-white'>
         <div className='flex justify-center items-center h-56 mt-3'>
             <Image src={pizzaPic} alt="A pizza" className='h-56 w-56'/>
         </div>
         <div>
-            <h4 className='mt-3 ml-5 text-lg font-bold font-sans'>Margherita</h4>
-            <p className='font-thin text-xs ml-5'>Tomato, Mozzarella, Beef Peppers, Onions, Olives</p>
+            <h4 className='mt-3 ml-5 text-lg font-bold font-sans'>{pizza.name}</h4>
+            {pizza.toppings.length > 0 && pizza.toppings.map(topping => (
+                <p className='font-thin text-xs ml-5'>{topping}</p>
+            ))}
         </div>
 
         <div className="mx-5 mt-2 flex justify-between">
@@ -23,8 +40,12 @@ function Pizza() {
                 <p className='text-sm'>Birr</p>
             </div>
 
-            <Button size='large' variant='contained' className='bg-[#FF8100] px-8'>
-                <Link href="/order" className="font-sans font-semibold">Order</Link></Button>
+            <Button 
+                size='large'
+                variant='contained'
+                className='bg-[#FF8100] px-8 font-sans font-semibold'
+                onClick={() => {router.push(`/order/?name=${pizza.name}`)}}>
+                Order</Button>
         </div>
         <hr className='mx-5 mt-3'/>
         <div className="flex justify-evenly items-center mx-5 mt-3 mb-5">

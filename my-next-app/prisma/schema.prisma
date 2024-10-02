@@ -47,6 +47,10 @@ model Order {
   user         User        @relation(fields: [user_id], references: [id])
   Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
   restaurantId Int?
+  status       String
+  toppings     String[]
+  quantity     Int
+  price        Decimal
 }
 
 model User {

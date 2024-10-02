@@ -16,7 +16,6 @@ type User = {
   actions: string[]
 }
 
-
 function page() {
   const [data, setData ] = useState([]);
   const [loading, setLoading] = useState(true);
