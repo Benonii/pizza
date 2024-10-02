@@ -74,7 +74,7 @@ function AddRoleModal() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({name, actions: givenPermissions, restaurantId })
+          body: JSON.stringify({name, actions: givenPermissions })
         })
     
         const data = await res.json()
@@ -88,6 +88,7 @@ function AddRoleModal() {
           console.log("Network error")
         }
       }
+
 
     return (
         <div className=''>
@@ -111,7 +112,7 @@ function AddRoleModal() {
                     className='w-[50vw] max-w-96'/>
                 </div>
                 <div className='mx-24 mt-5'>
-                  <h2 className='font-sans text-xl text-gray3 mt-2 mb-2'>Toppings</h2>
+                  <h2 className='font-sans text-xl text-gray3 mt-2 mb-2'>Actions</h2>
                   <div className="flex flex-wrap w-full mb-5">
                     {permissions.map((permission: Permission) => (
                       <FormControlLabel

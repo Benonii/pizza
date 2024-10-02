@@ -64,7 +64,7 @@ function page() {
       const storedRestaurantId = localStorage.getItem('restaurantId');
       setRestaurantId(storedRestaurantId);
     }
-  }, []);
+  }, [restaurantId]);
 
   useEffect(() => {
     const fetchRoles = async () => {
@@ -80,7 +80,8 @@ function page() {
 
         // Parse the JSON data
         const data = await response.json();
-        setData(data); // Set the roles state
+        console.log("Data:",data.roles)
+        setData(data.roles); // Set the roles state
       } catch (err: any) {
         setError(err.message); // Set the error state
       } finally {
@@ -89,7 +90,7 @@ function page() {
       console.log("Roles:", data)
     };
 
-    fetchRoles(); // Call the fetch function
+    fetchRoles();  // Call the fetch function
   }, [restaurantId]);
 
   const formatDate = (dateString: string) => {
@@ -149,4 +150,5 @@ const table = useMaterialReactTable({
   )
 }
 
-export default page
+export default page;
+

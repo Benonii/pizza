@@ -7,9 +7,17 @@ type Role = {
   actions: number[]; // Assuming you are passing an array of permission IDs
 };
 
+type User = {
+    name: string;
+    email: string;
+    location: string;
+    phone_number: string
+    roleId: string 
+}
+
 export async function POST(request: Request) {
   try {
-    const { name, actions, restaurantId } = await request.json();
+    const { name, email, location, phone_number, password, roleId,  } = await request.json();
 
     // Validate input
     if (!name || typeof name !== 'string') {
@@ -21,14 +29,17 @@ export async function POST(request: Request) {
     // }
 
     // Create the new role and connect to existing permissions
-    const newRole = await prisma.role.create({
+    const newRole = await prisma.user.create({
       data: {
         name,
-        actions,
-        restaurant: {
-            connect: { id: Number(restaurantId)},
+        email,
+        location,
+        phone_number,
+        password,
+        role: {
+            connect: { id: Number(roleId)},
         }
-      } as Prisma.RoleCreateInput,
+      } as Prisma.UserCreateInput,
     });
 
     return NextResponse.json({ success: true, role: newRole }, { status: 201 });
