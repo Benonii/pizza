@@ -39,20 +39,19 @@ function OrderPizza({ name  }: OrderPizzaProps) {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await fetch('/api/menu', {
+        const res = await fetch('/api/orders/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId: 1,
-            name,
+            user_id: 1,
             restaurantId,
             status:"Ordered",
             toppings,
             quantity: 1,
-            price: 150,
-          })
+            price: 150.0,
+          }),
         })
     
         const data = await res.json()
