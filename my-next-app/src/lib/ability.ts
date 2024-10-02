@@ -7,7 +7,7 @@ type Subject = 'User' | 'Order' | 'Customer' | 'Role';
 export type AppAbility = Ability<[Action, Subject]>;
 
 export const defineAbilitiesFor = (permissions: Array<{ action: Action; subject: Subject}>): AppAbility => {
-    const { can, cannot, build } = new AbilityBuilder<AppAbility>(createMongoAbility) ;
+    const { can, cannot, build } = new AbilityBuilder<AppAbility>(Ability) ;
 
     permissions.forEach(({ action, subject }) => {
         can(action, subject);

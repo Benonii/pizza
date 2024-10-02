@@ -8,21 +8,20 @@ datasource db {
 }
 
 model Restaurant {
-  id           Int        @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   admin_name   String
-  admin        User       @relation("RestaurantAdmin", fields: [adminId], references: [id])
+  admin        User     @relation("RestaurantAdmin", fields: [adminId], references: [id])
   adminId      Int
   name         String
   email        String
   password     String
   phone_number String
   location     String
-  pizzas       Pizza[]    @relation("RestaurantPizzas")
+  pizzas       Pizza[]  @relation("RestaurantPizzas")
   toppings     String[]
   admins       User[]
-  roles        String[]
+  roles        Role[]   @relation("RestaurantRoles")
   Order        Order[]
-  User         User[]     @relation("RestaurantUsers")
   Menu         Menu[]
 }
 
@@ -59,14 +58,23 @@ model User {
   phone_number String? // Optional field
   created_at   DateTime     @default(now())
   Order        Order[]
-  Restaurant   Restaurant?  @relation("RestaurantUsers", fields: [restaurantId], references: [id])
   restaurants  Restaurant[] @relation("RestaurantAdmin")
   restaurantId Int?
+  Restaurant   Restaurant?  @relation(fields: [restaurantId], references: [id])
+}
+
+model Role {
+  id           Int        @id @default(autoincrement())
+  name         String
+  created_at   DateTime   @default(now())
+  actions      String[]
+  restaurant   Restaurant @relation("RestaurantRoles", fields: [restaurantId], references: [id])
+  restaurantId Int
 }
 
 model Permission {
-  id           Int          @id @default(autoincrement())
-  
+  id      Int    @id @default(autoincrement())
+  name    String
+  action  String
+  subject String
 }
-
-
