@@ -22,6 +22,9 @@ function page() {
   const [ error, setError ] = useState<string | null>(null);
   const [restaurantId, setRestaurantId] = useState<string | null>(null);
 
+  const label = { inputProps: { 'aria-label': 'Toppings' } };
+
+
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -41,7 +44,6 @@ function page() {
     }
   }
 
-  const label = { inputProps: { 'aria-label': 'Toppings' } };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,8 +62,10 @@ function page() {
     if (res.ok) {
       if (data.success) {
         setSuccess('Pizza Created Successfully');
+        setFormData({ name: '', price: '' });
+        setToppings([]);
       } else {
-        setSuccess("Failed to create Pizza");
+        setError("Failed to create Pizza");
       }
     } else {
       console.log("Network error")

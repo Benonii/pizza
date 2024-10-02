@@ -40,8 +40,8 @@ export default function OrderCompleteModal() {
         <Box sx={style} className='border-white rounded-lg'>
             <div className='rounded-xl shadow-lgw-[336px] h-[266px] flex flex-col justify-center items-center'>
                 <Image src={successIcon} alt="A success icon" className='w-28'/>
-            <p className='text-center font-sans '>Your order has been successfully completed</p>
-    </div>
+                <p className='text-center font-sans '>Your order has been successfully completed</p>
+            </div>
         </Box>
       </Modal>
     </div>

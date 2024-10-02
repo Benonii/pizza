@@ -1,26 +1,26 @@
 [
     {
-      "name": "Update Order Status",
+      "name": "UpdateOrderStatus",
       "action": "update",
       "subject": "Order"
     },
     {
-      "name": "See Orders",
+      "name": "SeeOrders",
       "action": "read",
       "subject": "Order"
     },
     {
-      "name": "Add Users",
+      "name": "AddUsers",
       "action": "create",
       "subject": "User"
     },
     {
-      "name": "See Customers",
+      "name": "SeeCustomers",
       "action": "read",
-      "subject": "Customer"
+      "subject": "User"
     },
     {
-      "name": "Create Roles",
+      "name": "CreateRoles",
       "action": "create",
       "subject": "Role"
     }
