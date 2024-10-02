@@ -4,7 +4,7 @@ import { Prisma } from '@prisma/client';
 
 export async function POST(req: Request) {
   try {
-    const { user_id, restaurantId, status, toppings, quantity } = await req.json();
+    const { user_id, restaurantId, status, toppings, quantity, price } = await req.json();
 
     // Validate input data
     if (!user_id || !status) {
@@ -15,10 +15,11 @@ export async function POST(req: Request) {
     const newOrder = await prisma.order.create({
       data: {
         user_id,
-        restaurantId, // This can be null if no restaurant is associated
+        restaurantId: Number(restaurantId), // This can be null if no restaurant is associated
         status,
         toppings,
-        quantity
+        quantity,
+        price: Number(price)
       },
     });
 
