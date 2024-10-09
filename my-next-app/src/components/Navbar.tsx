@@ -1,15 +1,23 @@
 "use client";
 
-import React from 'react';
+import React, {useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
-
+import { Drawer, Button } from '@mui/material';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 
 
 function Navbar() {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (event.type === 'keydown') {
+      return;
+    }
+    setOpen(open);
+  };
   const pathname = usePathname();
   console.log("Path:", pathname);
 
@@ -25,7 +33,24 @@ function Navbar() {
         <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-sm`}>Orders</Link>
         <Link href="#" className={`hidden ${pathname === "/#" ? "text-orange2" : ""} text-sm md:block`}>Who we are</Link>
 
-        <MenuIcon className='md:hidden' />
+        
+        <Button variant="contained" className='bg-orange2 p-3'><Link href='/register'>Register</Link></Button>
+
+        <Drawer
+          anchor="right"
+          open={open}
+          onClose={toggleDrawer(false)}>
+            <div
+              role="presentation"
+              onClick={toggleDrawer(false)}
+              onKeyDown={toggleDrawer(false)}
+              className="flex flex-col justify-center items-center bg-white w-64 h-full shadow-lg" // Tailwind classes for styling
+            >
+              <Link href="/" className={`${pathname === "/" ? "text-orange2" : ""} text-sm`}>Home</Link>
+              <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-sm`}>Orders</Link>
+              <Link href="#" className={`hidden ${pathname === "/#" ? "text-orange2" : ""} text-sm md:block`}>Who we are</Link> 
+            </div>
+          </Drawer>
       </div>
 
       <div className="flex"></div>

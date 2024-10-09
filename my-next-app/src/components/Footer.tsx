@@ -8,7 +8,7 @@ import { IconButton, Stack } from '@mui/material';
 function Footer() {
   return (
     <footer>
-        <div className="bg-black text-white absolute w-full">
+        <div className="absolute bottom-0 bg-black text-white w-full">
           <div className="text-center leading-loose">
             <p className='pt-5'>@2024 Pizza All Rights Reserved</p>
             <p>Terms and Conditions</p>
