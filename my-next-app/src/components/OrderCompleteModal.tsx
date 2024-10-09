@@ -27,7 +27,11 @@ export default function OrderCompleteModal() {
 
   return (
     <div className='w-[90%]'>
-      <Button type="submit" variant='contained' className='bg-orange2 w-full' onClick={handleOpen}>
+      <Button type="submit" variant='contained' sx={{
+        backgroundColor: '#FF8100',
+        width: '100%',
+      }}
+      onClick={handleOpen}>
         Order
       </Button>      
       <Modal
