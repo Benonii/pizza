@@ -29,9 +29,12 @@ function Pizza({ pizza }: PizzaProps ) {
         </div>
         <div>
             <h4 className='mt-3 ml-5 text-lg font-bold font-sans'>{pizza.name}</h4>
+            <div className="flex ml-5">
             {pizza.toppings.length > 0 && pizza.toppings.map(topping => (
-                <p className='font-thin text-xs ml-5'>{topping}</p>
+                <p className='font-thin text-xs ml-1'>{topping},</p>
             ))}
+            </div>
+            
         </div>
 
         <div className="mx-5 mt-2 flex justify-between">

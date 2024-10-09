@@ -9,7 +9,7 @@ import { ArrowOutwardRounded } from '@mui/icons-material';
 type OrderType = {
     id: number
     price: string
-    qunatity: number
+    quantity: number
     restaurantId: number
     status: "Ordered" | "Delivered"
     toppings: String[] | []

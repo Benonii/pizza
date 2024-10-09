@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { MRT_Cell, MRT_ColumnDef } from 'material-react-table';
 import { Select, MenuItem } from '@mui/material';
 import { Box } from '@mui/material';
@@ -80,6 +80,25 @@ const data: Order[] = [
 ]
 
 function page() {
+//   const [ orders , setOrders ] = useState<Order[]>([]);
+
+//   useEffect(() => {
+//     const getOrders = async () => {
+//       try {
+//         const response = await fetch('/api/orders');
+//         if (!response.ok) {
+//           throw new Error('Failed to fetch pizzas');
+//         }
+//         const orders = await response.json();
+//         setOrders(orders);
+//       } catch (error) {
+//         console.error('Error fetching pizzas:', error);
+//         return [];
+//       }
+//     };
+
+//     getOrders();
+//   }, []);
     const columns = useMemo(
         () => [
             {
