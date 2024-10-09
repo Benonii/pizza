@@ -24,10 +24,12 @@ export default function OrderDetailsModal() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className=''>
-        <IconButton size="small" className="text-orange2" onClick={handleOpen}>
-            <VisibilityIcon fontSize="small" />
-            <p className='text-sm ml-1'>Toppings</p>
+    <div className='text-orange2'>
+        <IconButton size="small" onClick={handleOpen}>
+            <VisibilityIcon sx={{
+              color: '#FF8100'
+            }} fontSize="small" />
+            <p className='text-sm text-orange2 ml-1'>Toppings</p>
         </IconButton>
      
       <Modal

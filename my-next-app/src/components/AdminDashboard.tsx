@@ -90,7 +90,7 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
       </div>
 
       {/* Main Content */}
-      <div className="w-4/5 flex flex-col bg-gray5">
+      <div className="w-fit flex flex-col bg-gray5">
         {/* Top Navbar */}
         <div className="flex items-center justify-between p-4 shadow-lg bg-white">
           <div className="flex items-center space-x-4">
