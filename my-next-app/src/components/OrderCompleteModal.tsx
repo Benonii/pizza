@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import successIcon from '@/../public/assets/images/success-icon.png';
 
@@ -23,7 +24,14 @@ const style = {
 export default function OrderCompleteModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setTimeout(() => {
+      router.push('/history');
+    }, 3000)
+  }
+
+  const router = useRouter();
 
   return (
     <div className='w-[90%]'>
