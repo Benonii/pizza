@@ -6,13 +6,13 @@ import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import UploadFile from '@/components/UploadFile';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
+import OrangeCheckbox from '@/components/OrangeCheckbox';
 
 function Page() {
   const [ formData, setFormData ] = useState({
@@ -139,12 +139,20 @@ function Page() {
                 <FormControlLabel
                     label="I accept the Terms and Conditions"
                     control={
-                        <Checkbox {...label} />
+                        <OrangeCheckbox {...label} />
                     }
                     className='font-sans'
                 />
                 <div className="mt-5 flex justify-center">
-                    <Button variant="contained" type='submit' className='bg-orange2 w-[100%] font-semibold'>Sign up</Button>
+                    <Button variant="contained" type='submit'
+                      sx={{
+                        backgroundColor: '#FF8100',
+                        width: '100%',
+                        font: '700',
+                      }}
+                    >
+                      Sign up
+                    </Button>
                 </div>
 
                 <p className='text-center'>Already have an account? <span className='text-orange2 underline'><Link href="/login">Log in</Link></span></p>
