@@ -27,8 +27,19 @@ export default function PizzaUploadedModal() {
 
   return (
     <div className=''>
-        <Button  variant='contained' className='bg-orange2 w-[30vw] max-w-64 pt-5 pb-5 rounded-xl font-semibold' type='submit' onClick={handleOpen}>
-            Submit
+        <Button  variant='contained'
+          sx={{
+            backgroundColor: '#FF8100',
+            width: '30vw',
+            maxWidth: '16rem',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            borderRadius: 1,
+            fontWeight: 700
+          }}
+          type='submit' onClick={handleOpen}
+        >
+          Submit
         </Button>
      
       <Modal
