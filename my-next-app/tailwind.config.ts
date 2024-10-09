@@ -6,6 +6,29 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'background',
+    //     foreground: "var(--foreground)",
+        'orange1',
+        'orange2',
+        'orange3',
+        'orange4', 
+        'orange5',
+        'orange6',
+        'orange7',
+
+        'gray1',
+        'gray2',
+        'gray3',
+        'gray4',
+        'gray5',
+        'gray6',
+
+        'green1',
+        'green2',
+        'green3',
+        'green4'
+  ],
   theme: {
     extend: {
       fontFamily: {
