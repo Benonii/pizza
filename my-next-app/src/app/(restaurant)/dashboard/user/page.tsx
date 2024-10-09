@@ -25,7 +25,7 @@ function Page() {
       const storedRestaurantId = localStorage.getItem('restaurantId');
       setRestaurantId(storedRestaurantId);
     }
-  }, [restaurantId]);
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -52,7 +52,7 @@ function Page() {
     };
 
     fetchUsers();  // Call the fetch function
-  }, [restaurantId, data]);
+  }, []);
 
   console.log(loading);
 

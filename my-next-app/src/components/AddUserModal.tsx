@@ -122,8 +122,13 @@ function AddUserModal() {
 
     return (
         <div className='mt-10 ml-5'>
-          <Button variant='contained' className='bg-orange2' onClick={handleOpen}>
-            + Add User
+          <Button variant='contained' 
+          sx={{
+            backgroundColor: '#FF8100'
+          }}
+          onClick={handleOpen}
+          >
+            Add User
           </Button>
           <Modal 
             open={open}
@@ -185,7 +190,16 @@ function AddUserModal() {
                         ))}
                       </Select>
                     </FormControl>
-                  <Button type='submit' variant='contained' className='bg-orange2 p-4 px-14'>Add</Button>
+                  <Button type='submit' variant='contained' 
+                    sx={{
+                      backgroundColor: '#FF8100',
+                      padding: 2,
+                      paddingInline: 6
+                    }}
+                    className='bg-orange2 p-4 px-14'
+                    >
+                      Add
+                    </Button>
                 </div>
                 {error && (<p className='text-red-600'>{error}</p>)}
                 {success && (<p className='text-green-600'>{success}</p>)}
