@@ -2,8 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Checkbox from '@mui/material/Checkbox';
-import { styled } from '@mui/system';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import RelatedPizza from './RelatedPizza';
 import OrderCompleteModal from './OrderCompleteModal';
@@ -17,18 +15,18 @@ interface OrderPizzaProps {
 }
 
 function OrderPizza({ name  }: OrderPizzaProps) {
-    const [ toppings, setToppings ] = React.useState<String[]>([]);
+    const [ toppings, setToppings ] = React.useState<string[]>([]);
     const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
 
     const label = { inputProps: { 'aria-label': 'Toppings' } };
 
-    const handleCheckboxChange = (topping: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!topping.includes(topping)) {
-            setToppings(prevState => ([...prevState, topping]))
-        } else {
-          setToppings( prevState => (prevState.filter(value => value !== topping)))
-        }
-    }
+    // const handleCheckboxChange = (topping: string) => () => {
+    //     if (!topping.includes(topping)) {
+    //         setToppings(prevState => ([...prevState, topping]))
+    //     } else {
+    //       setToppings( prevState => (prevState.filter(value => value !== topping)))
+    //     }
+    // }
 
     React.useEffect(() => {
         if (typeof window !== 'undefined') {

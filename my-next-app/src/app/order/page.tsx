@@ -1,18 +1,31 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import OrderPizza from '@/components/OrderPizza';
 import { useSearchParams } from 'next/navigation';
 
-function page() {
+function OrderPizzaWrapper() {
+  const [name, setName] = useState<string>("");
+
   const searchParams = useSearchParams();
-  const name = searchParams.get('name') || "";
-  
+
+  // Use useEffect to safely get searchParams on the client side
+  useEffect(() => {
+    const fetchedName = searchParams.get('name') || "";
+    setName(fetchedName);
+  }, [searchParams]);
+
   return (
-    <div className='bg-background'>
-      <OrderPizza name={name} />
+    <div className="bg-background">
+      <OrderPizza name={namSuspee} />
     </div>
-  )
+  );
 }
 
-export default page
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrderPizzaWrapper />
+    </Suspense>
+  );
+}

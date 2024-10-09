@@ -25,6 +25,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ message: 'User created successfully!', user });
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: 'User already exists'}, { status: 400 })
     }
 }

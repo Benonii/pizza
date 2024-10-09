@@ -3,11 +3,8 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import { Search, Refresh, GetApp, FilterList, Fullscreen } from '@mui/icons-material';
 import AddRoleModal from '@/components/AddRoleModal';
 
 type Role = {
@@ -53,10 +50,9 @@ type Role = {
 // ]
 
 
-function page() {
+function Page() {
   const [data, setData ] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
 
   useEffect(() => {
@@ -82,8 +78,8 @@ function page() {
         const data = await response.json();
         console.log("Data:",data.roles)
         setData(data.roles); // Set the roles state
-      } catch (err: any) {
-        setError(err.message); // Set the error state
+      } catch (err) {
+        console.log(err);
       } finally {
         setLoading(false); // Set loading to false
       }
@@ -91,14 +87,13 @@ function page() {
     };
 
     fetchRoles();  // Call the fetch function
-  }, [restaurantId]);
+  }, [restaurantId, data]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `${date.getMonth() + 1}/${date.getDate()}/${String(date.getFullYear()).slice(-2)}`;
   };
 
-  
   const columns = useMemo(() => [
     {
       header: 'Name',
@@ -121,7 +116,7 @@ function page() {
     {
       header: 'Actions',
       accessorKey: 'actions',
-      Cell: ({ row }: { row: { original: Role }}) => (
+      Cell: ({ /*{ row }: { row: { original: Role }} */}) => (
         <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
           <IconButton size="small" className="">
             <VisibilityIcon fontSize="small" />
@@ -140,15 +135,19 @@ const table = useMaterialReactTable({
 });
 
   return (
-
+    <div>
+      {loading ? (
+      <div>Loading...</div>
+      ) : (
       <div className="justify-between mt-10 mx-5 bg-white border">
-          {/* Add Role Button */}
-          <AddRoleModal />
-          <MaterialReactTable table={table} />
-        </div>
-    
+        {/* Add Role Button */}
+        <AddRoleModal />
+        <MaterialReactTable table={table} />
+      </div>
+      )}
+    </div>
   )
 }
 
-export default page;
+export default Page;
 

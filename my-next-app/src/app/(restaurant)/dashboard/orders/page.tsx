@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from 'react';
-import { MRT_Cell, MRT_ColumnDef } from 'material-react-table';
-import { Select, MenuItem } from '@mui/material';
+import React, { useMemo } from 'react';
 import { Box } from '@mui/material';
 import OrderDetailsModal from '@/components/OrderDetailsModal';
 
@@ -79,7 +77,7 @@ const data: Order[] = [
     },
 ]
 
-function page() {
+function Page() {
 //   const [ orders , setOrders ] = useState<Order[]>([]);
 
 //   useEffect(() => {
@@ -113,7 +111,7 @@ function page() {
             {
                 header: 'Toppings',
                 accessorKey: 'toppings',
-                Cell: ({ row }: {row: { original: Order}}) => (
+                Cell: ({/* { row }: {row: { original: Order}} */}) => (
                     <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
                         <OrderDetailsModal />
                         {/* <span>{row.original.toppings}</span> */}
@@ -179,4 +177,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

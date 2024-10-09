@@ -1,10 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import Button from '@mui/material/Button';
 
 import pizzaPic from '@/../public/assets/images/pizza-4.png';
-import profilePic from '@/../public/assets/images/profile.jpg';
-import { ArrowOutwardRounded } from '@mui/icons-material';
 
 type OrderType = {
     id: number
@@ -12,7 +9,7 @@ type OrderType = {
     quantity: number
     restaurantId: number
     status: "Ordered" | "Delivered"
-    toppings: String[] | []
+    toppings: string[] | []
     user_id: number
 }
 

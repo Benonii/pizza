@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
-type Role = {
-  name: string;
-  actions: number[]; // Assuming you are passing an array of permission IDs
-};
+// type Role = {
+//   name: string;
+//   actions: number[]; // Assuming you are passing an array of permission IDs
+// };
 
 export async function POST(request: Request) {
   try {

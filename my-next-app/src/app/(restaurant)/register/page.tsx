@@ -10,12 +10,11 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import bcrypt from 'bcrypt';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 
-function page() {
+function Page() {
   const [ formData, setFormData ] = useState({
     admin_name: '',
     email: '',
@@ -79,6 +78,9 @@ function page() {
     // } else {
     //   setError(data.error);
     // }
+    console.log(error);
+    console.log(success);
+
   };
 
   return (
@@ -153,4 +155,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

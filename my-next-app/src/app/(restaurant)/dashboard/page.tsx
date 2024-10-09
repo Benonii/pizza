@@ -1,19 +1,23 @@
 "use client";
 
-import React from 'react';
-import AdminDashboard from '@/components/AdminDashboard';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-function page() {
+function Page() {
   const pathname = usePathname();
   const router = useRouter();
 
-  pathname === '/dashbard' && router.push('/dashboard/orders');
+  useEffect(() => {
+    if (pathname === '/dashbard') {
+      router.push('/dashboard/orders');
+    }
+  }, [pathname, router]);
+  
   return (
     <div className=''>
     </div>
   )
 }
 
-export default page
+export default Page
