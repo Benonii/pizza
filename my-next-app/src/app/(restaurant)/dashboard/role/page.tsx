@@ -87,7 +87,7 @@ function Page() {
     };
 
     fetchRoles();  // Call the fetch function
-  }, [restaurantId, data]);
+  }, [restaurantId]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -134,17 +134,13 @@ const table = useMaterialReactTable({
   enableGlobalFilter: true,
 });
 
+console.log(loading);
+
   return (
-    <div>
-      {loading ? (
-      <div>Loading...</div>
-      ) : (
-      <div className="justify-between mt-10 mx-5 bg-white border">
-        {/* Add Role Button */}
-        <AddRoleModal />
-        <MaterialReactTable table={table} />
-      </div>
-      )}
+    <div className="justify-between mt-10 mx-5 bg-white border">
+      {/* Add Role Button */}
+      <AddRoleModal />
+      <MaterialReactTable table={table} />
     </div>
   )
 }
