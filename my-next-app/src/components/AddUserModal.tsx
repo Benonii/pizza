@@ -2,29 +2,28 @@
 
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { Button, TextField, Typography, FormControlLabel, InputLabel } from '@mui/material';
+import { Button, TextField, InputLabel } from '@mui/material';
 import Modal from '@mui/material/Modal';
-import permissions from '@/constants/permissions.json';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-type Permission = {
-    name: string
-    action: string
-    subject: string 
-}
+// type Permission = {
+//     name: string
+//     action: string
+//     subject: string 
+// }
 
 type Role = {
     id: number
     name: string;
-    actions: String[]; // Assuming you are passing an array of permission IDs
+    actions: string[]; // Assuming you are passing an array of permission IDs
   };
 
 
 function AddUserModal() {
     const style = {
-      position: 'absolute' as 'absolute',
+      position: 'absolute',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
@@ -52,8 +51,6 @@ function AddUserModal() {
     const [ selectRole, setSelectRole ] = React.useState<string | undefined>(undefined);
     const [roles, setRoles] = React.useState([]);
 
-    const label = { inputProps: { 'aria-label': 'Permissions' } };
-
     const handleSelectRole = (event: SelectChangeEvent) => {
         setSelectRole(event.target.value as string);
     }
@@ -73,8 +70,8 @@ function AddUserModal() {
             // Parse the JSON data
             const data = await response.json();
             setRoles(data.roles); // Set the roles state
-          } catch (err: any) {
-            setError(err.message); // Set the error state
+          } catch (err) {
+            console.log(err); // Set the error state
           } finally {
             setLoading(false); // Set loading to false
           }
@@ -121,7 +118,7 @@ function AddUserModal() {
         }
       }
 
-      console.log("Roles:", roles)
+      console.log(loading);
 
     return (
         <div className='mt-10 ml-5'>

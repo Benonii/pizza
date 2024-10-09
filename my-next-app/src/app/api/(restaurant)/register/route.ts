@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: false, error: validation.error.errors }, { status: 400 });
     }
 
-    const { admin_name, email, password, phone_number, name, location, admin } = validation.data;
+    const { admin_name, email, password, phone_number, name, location } = validation.data;
     const hashedPassword = await bcrypt.hash(password, 10);
     const userHashedPassword = await bcrypt.hash(password, 10);
 

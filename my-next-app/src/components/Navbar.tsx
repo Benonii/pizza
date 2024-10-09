@@ -3,7 +3,6 @@
 import React, {useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { Drawer, Button } from '@mui/material';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';

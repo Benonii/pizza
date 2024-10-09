@@ -2,12 +2,10 @@
 
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { Button, TextField, Typography, FormControlLabel } from '@mui/material';
+import { Button, TextField, FormControlLabel } from '@mui/material';
 import Modal from '@mui/material/Modal';
-import Image from 'next/image';
 import permissions from '@/constants/permissions.json';
 import OrangeCheckbox from './OrangeCheckbox';
-import UploadButton from './UploadFile';
 
 type Permission = {
     name: string
@@ -17,7 +15,7 @@ type Permission = {
 
 function AddRoleModal() {
     const style = {
-      position: 'absolute' as 'absolute',
+      position: 'absolute',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
@@ -32,10 +30,10 @@ function AddRoleModal() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [ name, setName ] = React.useState('');
-    const [ givenPermissions, setGivenPermissions ] = React.useState<String[]>([]);
-    const [error, setError ] = React.useState<string | null>(null);
-    const [success, setSuccess ] = React.useState<string | null>(null);
-    const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
+    const [ givenPermissions, setGivenPermissions ] = React.useState<string[]>([]);
+    const [ error, setError ] = React.useState<string | null>(null);
+    const [ success, setSuccess ] = React.useState<string | null>(null);
+    const [ restaurandId, setRestaurantId ] = React.useState<string | null>(null);
 
     const label = { inputProps: { 'aria-label': 'Permissions' } };
 
@@ -51,7 +49,7 @@ function AddRoleModal() {
         setName(e.target.value);
     }
 
-    const handleCheckboxChange = (permission: Permission) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = (permission: Permission) => () => {
         if (!givenPermissions.includes(permission.name)) {
           setGivenPermissions(prevState => ([...prevState, permission.name]))
         } else {
@@ -64,10 +62,10 @@ function AddRoleModal() {
         setSuccess(null);
         setError(null);
 
-        const role = {
-          name,
-          permissions
-        }
+        // const role = {
+        //   name,
+        //   permissions
+        // }
     
         const res = await fetch('/api/roles/create', {
           method: 'POST',
@@ -88,6 +86,8 @@ function AddRoleModal() {
           console.log("Network error")
         }
       }
+
+    console.log(restaurandId)
 
 
     return (

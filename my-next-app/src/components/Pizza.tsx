@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
 
 import pizzaPic from '@/../public/assets/images/pizza-4.png';
 import profilePic from '@/../public/assets/images/profile.jpg';
@@ -31,7 +30,7 @@ function Pizza({ pizza }: PizzaProps ) {
             <h4 className='mt-3 ml-5 text-lg font-bold font-sans'>{pizza.name}</h4>
             <div className="flex ml-5">
             {pizza.toppings.length > 0 && pizza.toppings.map(topping => (
-                <p className='font-thin text-xs ml-1'>{topping},</p>
+                <p className='font-thin text-xs ml-1' key={topping}>{topping},</p>
             ))}
             </div>
             

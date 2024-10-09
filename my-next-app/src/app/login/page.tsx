@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png'
 
-function page() {
+function Page() {
   const [ formData, setFormData ] = useState({
     email: '',
     password: ''
@@ -89,4 +89,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

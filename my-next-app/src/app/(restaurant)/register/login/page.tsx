@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
-import UploadFile from '@/components/UploadFile';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
@@ -9,7 +8,7 @@ import Link from 'next/link';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
-function page() {
+function Page() {
   const label = { inputProps: { 'aria-label': 'Remomber me' } };
   return (
     <div className='flex'>
@@ -50,4 +49,4 @@ function page() {
   )
 }
 
-export default page;
+export default Page;

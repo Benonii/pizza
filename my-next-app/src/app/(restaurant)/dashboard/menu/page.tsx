@@ -5,11 +5,11 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import OrangeCheckbox from '@/components/OrangeCheckbox';
 import UploadButton from '@/components/UploadFile';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import PizzaUploadedModal from '@/components/PizzaUploadedModal';
 
 
-function page() {
+function Page() {
   const [ formData, setFormData ] = useState({
     name: '',
     price: '',
@@ -36,7 +36,7 @@ function page() {
     setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   }
 
-  const handleCheckboxChange = (topping: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (topping: string) => () => {
     if (!toppings.includes(topping)) {
       setToppings(prevState => ([...prevState, topping]))
     } else {
@@ -121,4 +121,4 @@ function page() {
   )
 }
 
-export default page
+export default Page;

@@ -3,7 +3,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from "@mui/material/IconButton";
 import AddUserModal from '@/components/AddUserModal';
@@ -16,10 +15,9 @@ type User = {
   actions: string[]
 }
 
-function page() {
+function Page() {
   const [data, setData ] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
 
   useEffect(() => {
@@ -45,8 +43,8 @@ function page() {
         const data = await response.json();
         console.log("Data:",data.users)
         setData(data.users); // Set the roles state
-      } catch (err: any) {
-        setError(err.message); // Set the error state
+      } catch (err) {
+        console.log(err); // Set the error state
       } finally {
         setLoading(false); // Set loading to false
       }
@@ -54,9 +52,9 @@ function page() {
     };
 
     fetchUsers();  // Call the fetch function
-  }, [restaurantId]);
+  }, [restaurantId, data]);
 
-  console.log("Users:", data);
+  console.log(loading);
 
   const columns = useMemo(() => [
     {
@@ -89,7 +87,7 @@ function page() {
     {
       header: 'Actions',
       accessorKey: 'actions',
-      Cell: ({ row }: { row: { original: User }}) => (
+      Cell: ({/* { row }: { row: { original: User }} */}) => (
         <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
           <IconButton size="small" className="">
             <VisibilityIcon fontSize="small" />
@@ -119,4 +117,4 @@ const table = useMaterialReactTable({
   )
 }
 
-export default page
+export default Page

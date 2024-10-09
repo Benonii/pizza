@@ -26,6 +26,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ message: 'Sign in successfull', user })
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: 'An error occured during sign in' }, { status: 500 })
     }
 }
