@@ -8,7 +8,9 @@ const UploadButton = () => {
       <Button
         variant="text"
         startIcon={<CloudUploadIcon className="text-orange-500" />}
-        className="text-orange-500 hover:bg-transparent"
+        sx={{
+          color: '#FF8100',
+        }}
         component="label"
       >
         Upload Photo

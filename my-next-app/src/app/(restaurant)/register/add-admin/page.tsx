@@ -146,7 +146,12 @@ function AddAdminForm() {
             <Button
               type="submit"
               variant="contained"
-              className="bg-orange2 w-[100%] font-semibold"
+              sx={{
+                backgroundColor: '#FF8100',
+                width: '100%',
+                fontWeight: '700',
+
+              }}
             >
               Continue
             </Button>
