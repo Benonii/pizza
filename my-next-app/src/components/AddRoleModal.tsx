@@ -92,7 +92,11 @@ function AddRoleModal() {
 
     return (
         <div className=''>
-          <Button variant='contained' className='bg-orange2' onClick={handleOpen}>
+          <Button variant='contained' 
+            sx={{
+              backgroundColor: '#FF8100',
+            }}
+            onClick={handleOpen}>
             + Add Role
           </Button> 
           <Modal 
@@ -131,7 +135,12 @@ function AddRoleModal() {
                   </div>
                 </div>
                 <div className='flex justify-center items-center w-full mt-5'>
-                  <Button type='submit' variant='contained' className='bg-orange2'>Update</Button>
+                  <Button type='submit' variant='contained' sx={{
+                    backgroundColor: '#FF8100'
+                  }}
+                  >
+                    Update
+                  </Button>
                 </div>
                 {error && (<p className='text-red-600'>{error}</p>)}
                 {success && (<p className='text-green-600'>{success}</p>)}
