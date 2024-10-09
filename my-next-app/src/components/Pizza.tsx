@@ -45,7 +45,12 @@ function Pizza({ pizza }: PizzaProps ) {
             <Button 
                 size='large'
                 variant='contained'
-                className='bg-[#FF8100] px-8 font-sans font-semibold'
+                sx={{
+                    backgroundColor:'#FF8100',
+                    paddingInline: '2rem',
+                    fontFamily: 'font-sans',
+                    fomtWeight: 700,
+                }}
                 onClick={() => {router.push(`/order/?name=${pizza.name}`)}}>
                 Order</Button>
         </div>

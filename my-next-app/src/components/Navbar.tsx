@@ -33,7 +33,14 @@ function Navbar() {
         <Link href="#" className={`hidden ${pathname === "/#" ? "text-orange2" : ""} text-sm md:block`}>Who we are</Link>
 
         
-        <Button variant="contained" className='bg-orange2 p-3'><Link href='/register'>Register</Link></Button>
+        <Button variant="contained" sx={{
+          backgroundColor: "#ff8100",
+          padding: 2,
+          marginTop: 2
+        }}
+        >
+          <Link href='/register'>Register</Link>
+        </Button>
 
         <Drawer
           anchor="right"

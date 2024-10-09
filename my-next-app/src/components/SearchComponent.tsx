@@ -26,7 +26,16 @@ export default function SearchComponent() {
         {/* Search Button */}
         <IconButton
           color="inherit"
-          className="bg-orange-500 hover:bg-orange-600 text-white rounded-full w-12 h-12 absolute right-2"
+          sx={{
+            backgroundColor: "#ff8100",
+            padding: 2,
+            borderRadius: '50%',
+            width: '3rem',
+            height: '3rem',
+            position: 'absolute',
+            right: '0.5rem',
+            color: 'white'
+          }}
         >
           <SearchIcon />
         </IconButton>
