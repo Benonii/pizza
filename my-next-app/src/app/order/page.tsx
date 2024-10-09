@@ -17,7 +17,7 @@ function OrderPizzaWrapper() {
 
   return (
     <div className="bg-background">
-      <OrderPizza name={namSuspee} />
+      <OrderPizza name={name} />
     </div>
   );
 }
