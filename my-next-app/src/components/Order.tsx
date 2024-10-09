@@ -33,7 +33,7 @@ function Order({ order }: OrderProps) {
                 <p className='text-sm'>Birr</p>
             </div>
 
-            <p className={`font-sans text-4xl mr-3 font-bold ${status === "Ordered" ? "text-orange5" : "text-green3"}`}>{order.status}</p>
+            <p className={`font-sans text-4xl mr-3 font-bold ${order.status === "Ordered" ? "text-orange5" : "text-green3"}`}>{order.status}</p>
 
         </div>
         {/* <hr className='mx-5 mt-3'/>
