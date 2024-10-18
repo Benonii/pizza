@@ -34,7 +34,10 @@ export default function SearchComponent() {
             height: '3rem',
             position: 'absolute',
             right: '0.5rem',
-            color: 'white'
+            color: 'white',
+            '&:hover':{
+              backgroundColor: '#FF9921',
+            }
           }}
         >
           <SearchIcon />
