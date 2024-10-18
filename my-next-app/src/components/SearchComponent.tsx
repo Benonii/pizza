@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 export default function SearchComponent() {
   return (
     <div className="flex items-center justify-center p-3">
-      <div className="relative bg-white rounded-full shadow-lg flex items-center">
+      <div className="relative bg-white rounded-full shadow-lg flex items-center w-[40vw] mt-10">
         {/* Search Input */}
         <TextField
           variant="outlined"

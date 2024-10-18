@@ -1,18 +1,21 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
+import OrangeCheckbox from '@/components/OrangeCheckbox';
 function Page() {
   const label = { inputProps: { 'aria-label': 'Remomber me' } };
+  const router = useRouter();
   return (
     <div className='flex'>
-        <div className="w-[50vw] h-[900px]">
+        <div className="w-[50vw] h-[950px]">
             <Image src={pizzaBanner} alt="A pizza slice with orange background" className='w-full h-full'/>
         </div>
 
@@ -30,17 +33,27 @@ function Page() {
                   label="Email address"
                  />
                 <TextField
+                  type="password"
                   label="Password"
                  />
                 <FormControlLabel
                     label="Remember me"
                     control={
-                        <Checkbox {...label} />
+                        <OrangeCheckbox {...label} />
                     }
                     className='font-sans'
                 />
                 <div className="mt-5 flex justify-center">
-                    <Button variant="contained" className='bg-orange2 w-[100%] font-semibold'><Link href="/dashboard">Login</Link></Button>
+                    <Button variant="contained" 
+                      sx={{
+                        backgroundColor: '#FF8100',
+                        width: '100%',
+                        font: 'bold',
+                      }}
+                      onClick={() => {router.push('/dashboard/orders')}}
+                      >
+                        Login
+                    </Button>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ function Featured() {
     <div className='mt-2'>
       <div className='flex justify-center font-sans'>
         <div className="relative mx-2 flex rounded-xl bg-gray4">
-            <div className="w-[60vw] max-w-[500px] mt-7 mx-4 mr-0">
+            <div className="max-w-[500px] mt-7 mx-4 mr-0">
                 <h2 className='text-xl text-white font-bold'>
                     Make your first order and get <span className='text-orange3'>50% off</span>.
                 </h2>
