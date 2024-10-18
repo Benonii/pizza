@@ -10,6 +10,7 @@ const UploadButton = () => {
         startIcon={<CloudUploadIcon className="text-orange-500" />}
         sx={{
           color: '#FF8100',
+          borderRadius: '25%',
         }}
         component="label"
       >
