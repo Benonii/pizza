@@ -50,7 +50,7 @@ function Page() {
                         width: '100%',
                         fontWeight: '700',
                       }}
-                      onClick={() => {router.push('/dashboard/orders')}}
+                      onClick={() => {router.back()}}
                       >
                         Login
                     </Button>
