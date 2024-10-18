@@ -12,7 +12,7 @@ import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 
 
 function Navbar() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [ open, setOpen ] = useState<boolean>(false);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown') {
@@ -20,6 +20,7 @@ function Navbar() {
     }
     setOpen(open);
   };
+  
   const pathname = usePathname();
   console.log("Path:", pathname);
 

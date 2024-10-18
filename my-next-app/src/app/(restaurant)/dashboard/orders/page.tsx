@@ -8,14 +8,15 @@ import {
     MaterialReactTable,
     useMaterialReactTable,
   } from 'material-react-table';
+import StatusDropdown from '@/components/StatusDropdown';
 
 type Order = {
-    name: string
-    toppings: string[]
-    quantity: number
-    customerNumber: string
-    createdAt: string
-    status: "Preparing" | "Ready" | "Delivered"
+    name: string;
+    toppings: string[];
+    quantity: number;
+    customerNumber: string;
+    createdAt: string;
+    status: 'Preparing' | 'Ready' | 'Delivered';
 }
   
 const data: Order[] = [
@@ -31,7 +32,7 @@ const data: Order[] = [
         quantity: 3,
         customerNumber: "+2511523654789",
         createdAt: "2:44 PM 8/14/24",
-        status: "Preparing",
+        status: 'Preparing',
     },
     {
         name: "Margherita",
@@ -45,7 +46,7 @@ const data: Order[] = [
         quantity: 3,
         customerNumber: "+2511523654789",
         createdAt: "2:44 PM 8/14/24",
-        status: "Preparing",
+        status: 'Preparing',
     },
     {
         name: "Margherita",
@@ -59,7 +60,7 @@ const data: Order[] = [
         quantity: 3,
         customerNumber: "+2511523654789",
         createdAt: "2:44 PM 8/14/24",
-        status: "Preparing",
+        status: 'Preparing',
     },
     {
         name: "Margherita",
@@ -73,7 +74,7 @@ const data: Order[] = [
         quantity: 3,
         customerNumber: "+2511523654789",
         createdAt: "2:44 PM 8/14/24",
-        status: "Preparing",
+        status: 'Preparing',
     },
 ]
 
@@ -149,9 +150,15 @@ function Page() {
                 header: 'Status',
                 accessorKey: 'status',
                 Cell: ({ row }: {row: { original: Order}}) => (
-                    <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
-                        {row.original.status}
-                    </Box>
+                    <StatusDropdown 
+                        status={row.original.status}
+                        onStatusChange={(newStatus: 'Preparing' | 'Ready' | 'Delivered') => {
+                            row.original.status = newStatus;
+                        }}
+                    />
+                    // <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
+                    //     {row.original.status}
+                    // </Box>
                 ),
             },
         ],
@@ -167,10 +174,10 @@ function Page() {
     });
   return (
     <div className='bg-white'>
-        <div className='border mt-10 mb-10 mx-5'>
+        <div className='border'>
             <MaterialReactTable
-            table={table} 
-    />
+                table={table} 
+            />
         </div>
     </div>
     
