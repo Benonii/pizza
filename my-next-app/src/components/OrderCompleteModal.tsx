@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import successIcon from '@/../public/assets/images/success-icon.png';
+import arrowImg from '@/../public/assets/images/arrow-img.png';
 
 const style = {
   position: 'absolute',
@@ -34,13 +35,18 @@ export default function OrderCompleteModal() {
   const router = useRouter();
 
   return (
-    <div className='w-[90%]'>
+    <div className='w-full'>
       <Button type="submit" variant='contained' sx={{
         backgroundColor: '#FF8100',
         width: '100%',
+        fontSize: 18,
+        fontWeight: 800,
+        display: 'flex',
+        justifyContent: 'space-between',
       }}
       onClick={handleOpen}>
         Order
+        <Image src={arrowImg} alt="An arrow" className='w-6'/>
       </Button>      
       <Modal
         open={open}
