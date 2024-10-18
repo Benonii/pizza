@@ -73,19 +73,23 @@ function Page() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col items-center w-full  h-screen bg-white'>
+    <form onSubmit={handleSubmit} className='flex flex-col items-center w-screen h-screen bg-white'>
       <div>
         <h1 className='font-sans text-2xl text-gray6 text-center mt-10 mb-5'>Add Menu</h1>
         <TextField
           label="Name"
           name="name"
           onChange={handleChange}
-          className='w-[50vw] max-w-96'/>
+          sx={{
+            width: '50vw',
+            minWidth: 250,
+          }}
+        />
 
       </div>
-      <div className='mx-24 mt-5'>
+      <div className='mt-5  w-[50vw] min-w-64'>
         <h2 className='font-sans text-xl text-gray3 mt-2 mb-2'>Toppings</h2>
-        <div className="flex flex-wrap mb-5">
+        <div className="flex  flex-wrap mb-5">
           {availableToppings.map((topping) => (
             <FormControlLabel
               key={topping}
@@ -107,7 +111,10 @@ function Page() {
         label="Price"
         name="price"
         onChange={handleChange}
-        className='w-[50vw] max-w-96'
+        sx={{
+          width: '50vw',
+          minWidth: 250,
+        }}
         />
         <div className="w-[35vw] max-w-72 mt-5">
           <UploadButton />
