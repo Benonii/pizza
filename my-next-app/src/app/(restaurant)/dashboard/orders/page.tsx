@@ -174,7 +174,7 @@ function Page() {
     });
   return (
     <div className='bg-white'>
-        <div className='border'>
+        <div className='absolute border w-[90%]'>
             <MaterialReactTable
                 table={table} 
             />

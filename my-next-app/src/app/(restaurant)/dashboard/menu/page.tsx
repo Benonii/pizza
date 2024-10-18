@@ -116,7 +116,7 @@ function Page() {
           minWidth: 250,
         }}
         />
-        <div className="w-[35vw] max-w-72 mt-5">
+        <div className="w-[60vw] max-w-72 mt-5">
           <UploadButton />
         </div>
         <div className='flex justify-center items-center w-full mt-5'>

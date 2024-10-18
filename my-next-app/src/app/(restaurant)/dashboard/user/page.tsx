@@ -6,12 +6,14 @@ import Box from '@mui/material/Box';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from "@mui/material/IconButton";
 import AddUserModal from '@/components/AddUserModal';
+import ActiveRoleToggle from '@/components/ActiveRoleToggle';
 
 
 type User = {
   name: string
   phone_number: string
   email: string
+  status: boolean
   actions: string[]
 }
 
@@ -87,12 +89,13 @@ function Page() {
     {
       header: 'Actions',
       accessorKey: 'actions',
-      Cell: ({/* { row }: { row: { original: User }} */}) => (
-        <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
-          <IconButton size="small" className="">
-            <VisibilityIcon fontSize="small" />
-          </IconButton>
-        </Box>
+      Cell: ({ row }: { row: { original: User }}) => (
+        <ActiveRoleToggle
+          status={true}
+          onStatusChange={(newStatus: boolean) => {
+            row.original.status = newStatus;
+          }}
+        />
       ),
     },
   ],
@@ -107,9 +110,9 @@ const table = useMaterialReactTable({
 
   return (
     <div>
-      <div className='bg-white h-full'>
+      <div className='absolute bg-white w-[90%]'>
         <AddUserModal />
-        <div className=" mb-10 mx-5">
+        <div className="border">
           <MaterialReactTable table={table} />
         </div>
       </div>

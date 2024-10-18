@@ -137,7 +137,7 @@ const table = useMaterialReactTable({
 console.log(loading);
 
   return (
-    <div className="justify-between mt-10 mx-5 bg-white border">
+    <div className="justify-between absolute  bg-white w-[90%]">
       {/* Add Role Button */}
       <AddRoleModal />
       <MaterialReactTable table={table} />

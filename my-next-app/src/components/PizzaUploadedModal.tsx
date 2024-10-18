@@ -30,11 +30,13 @@ export default function PizzaUploadedModal() {
         <Button  variant='contained'
           sx={{
             backgroundColor: '#FF8100',
-            width: '30vw',
+            width: '48vw',
             maxWidth: '16rem',
             paddingTop: '1rem',
             paddingBottom: '1rem',
             borderRadius: 1,
+            fontSize: 15,
+            fontFamily: 'sans-serif',
             fontWeight: 700
           }}
           type='submit' onClick={handleOpen}

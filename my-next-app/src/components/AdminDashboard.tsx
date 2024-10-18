@@ -50,7 +50,7 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
   const pageTitle = getPageTitle(pathname);
 
   return (
-    <div className="flex h-screen w-fit lg:w-screen">
+    <div className="flex h-screen w-screen lg:w-screen">
       {/* Sidebar */}
       <Drawer
           anchor="left"
@@ -178,7 +178,7 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
       </div>
 
       {/* Main Content */}
-      <div className="w-full lg:w-4/5 flex flex-col bg-gray5">
+      <div className="relative w-full lg:w-4/5 flex flex-col bg-gray5">
         {/* Top Navbar */}
         <div className="flex items-center justify-between p-4 shadow-lg bg-white">
          

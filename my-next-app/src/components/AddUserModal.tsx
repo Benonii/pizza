@@ -121,10 +121,11 @@ function AddUserModal() {
       console.log(loading);
 
     return (
-        <div className='mt-10 ml-5'>
+        <div className=''>
           <Button variant='contained' 
           sx={{
-            backgroundColor: '#FF8100'
+            backgroundColor: '#FF8100',
+            marginLeft: 2,
           }}
           onClick={handleOpen}
           >
