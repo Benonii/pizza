@@ -44,13 +44,12 @@ function Page() {
       <Navbar />
 
       {/* Page Content */}
-      <div className="flex-grow">
-        <h3 className='text-gray3 ml-3 mt-14 font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl text-center'>
+      <h3 className='self-start text-gray3 ml-3 mt-14 font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl text-center'>
           Order History
-        </h3>
-
+      </h3>
+      <div className="flex-grow">
         {/* Orders Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 px-4 sm:px-8 lg:px-16 mb-[300px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-8 lg:px-16 mb-[300px]'>
           {orders.length > 0 ? (
             orders.map((order) => (
               <Order key={order.id} order={order} />
