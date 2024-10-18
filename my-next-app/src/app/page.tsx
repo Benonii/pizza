@@ -51,14 +51,14 @@ export default function Home() {
       </div>
 
       {/* Featured Section */}
-      <section className="px-3 py-6">
-        <h3 className="text-gray3 text-xl md:text-2xl">Featured pizzas</h3>
+      <section className="px-3 py-6 mt-20">
+        <h3 className="text-gray3 ml-1 text-2xl md:text-2xl lg:text-3xl">Featured pizzas</h3>
         <Featured />
       </section>
 
       {/* Top Restaurants */}
-      <section className="px-3 py-6">
-        <h3 className="text-gray3 text-xl md:text-2xl">Top Restaurants</h3>
+      <section className="px-3 py-6 mt-10">
+        <h3 className="text-gray3 text-2xl md:text-2xl lg:text-3xl">Top Restaurants</h3>
         <div className="flex overflow-x-auto gap-4 bg-custom-gradient py-4">
           <TopRestaurant />
           <TopRestaurant />
@@ -68,8 +68,8 @@ export default function Home() {
       </section>
 
       {/* Popular Pizzas */}
-      <section className="px-3 py-6">
-        <h3 className="text-gray3 text-xl md:text-2xl">Popular pizzas</h3>
+      <section className="px-3 py-6 mt-20">
+        <h3 className="text-gray3 text-2xl md:text-2xl lg:text-3xl">Popular pizzas</h3>
         <div className="grid place-items-center gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {pizzas.length > 0 &&
             pizzas.map((pizza) => <Pizza key={pizza.id} pizza={pizza} />)}
@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* Fasting Pizzas */}
-      <section className="px-3 py-6">
+      <section className="px-3 py-6 mt-20">
         <h3 className="text-gray3 text-xl md:text-2xl">Fasting pizzas</h3>
         <div className=" ml-3 flex justify-start gap-4 overflow-x-auto">
           {pizzas.length > 0 &&
