@@ -44,7 +44,8 @@ function Navbar() {
           backgroundColor: "#ff8100",
           padding: 2,
           marginTop: 2,
-          marginRight: '-45px'
+          marginRight: '-45px',
+          fontWeight: '700',
         }}
         >
           <Link href='/register'>Register</Link>

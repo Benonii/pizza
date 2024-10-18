@@ -15,11 +15,11 @@ function Page() {
   const router = useRouter();
   return (
     <div className='flex'>
-        <div className="w-[50vw] h-[950px]">
+        <div className="hidden w-[50vw] h-[900px] md:block">
             <Image src={pizzaBanner} alt="A pizza slice with orange background" className='w-full h-full'/>
         </div>
 
-        <div className='ml-5 w-[50vw]'>
+        <div className='ml-5 w-screen md:w-[50vw]'>
             <div className='flex items-center mt-7 mb-3'>
               <Image src={pizzaIcon} alt="A slice of pizza" className='w-14' />
               <h1 className='font-sans text-orange1 text-2xl font-semibold ml-2'>Pizza</h1>
@@ -48,7 +48,7 @@ function Page() {
                       sx={{
                         backgroundColor: '#FF8100',
                         width: '100%',
-                        font: 'bold',
+                        fontWeight: '700',
                       }}
                       onClick={() => {router.push('/dashboard/orders')}}
                       >
