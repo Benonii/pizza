@@ -85,11 +85,11 @@ function Page() {
 
   return (
     <div className='flex'>
-        <div className="w-[50vw] h-[900px]">
+        <div className="hidden w-[50vw] h-[900px] md:block">
             <Image src={pizzaBanner} alt="A pizza slice with orange background" className='w-full h-full'/>
         </div>
 
-        <div className='ml-5 w-[50vw]'>
+        <div className='ml-5 w-screen md:w-[50vw]'>
             <hr className='mx-2'/>
             
             <div className='flex items-center mt-7 mb-3'>
@@ -97,7 +97,7 @@ function Page() {
               <h1 className='font-sans text-orange1 text-2xl font-semibold ml-2'>Pizza</h1>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3 mr-10">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-[75%] mx-2">
                 <TextField
                   label="Admin Name"
                   name="admin_name"

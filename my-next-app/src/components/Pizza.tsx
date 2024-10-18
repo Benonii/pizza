@@ -49,7 +49,7 @@ function Pizza({ pizza }: PizzaProps ) {
                     backgroundColor:'#FF8100',
                     paddingInline: '2rem',
                     fontFamily: 'font-sans',
-                    fomtWeight: 700,
+                    fontWeight: '700',
                 }}
                 onClick={() => {router.push(`/order/?name=${pizza.name}`)}}>
                 Order</Button>

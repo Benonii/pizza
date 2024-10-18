@@ -106,7 +106,7 @@ function AddAdminForm() {
 
   return (
     <div className="flex">
-      <div className="w-[50vw] h-[900px]">
+      <div className="hidden w-[50vw] h-[900px] md:block">
         <Image
           src={pizzaBanner}
           alt="A pizza slice with orange background"
@@ -114,7 +114,7 @@ function AddAdminForm() {
         />
       </div>
 
-      <div className="ml-5 w-[50vw]">
+      <div className="ml-5 w-screen md:w-[50vw]">
         <div className="flex items-center mt-7 mb-3">
           <Image src={pizzaIcon} alt="A slice of pizza" className="w-14" />
           <h1 className="font-sans text-orange1 text-2xl font-semibold ml-2">
@@ -126,7 +126,7 @@ function AddAdminForm() {
         <hr className="mr-2 mt-1 mb-5" />
         {error && <p className="text-red-600">{error}</p>}
         {success && <p className="text-green-600">{success}</p>}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 mr-10">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-[75%] mx-2">
           <TextField label="Admin Name" name="admin_name" onChange={handleChange} />
           <TextField label="Email address" name="email" onChange={handleChange} />
           <TextField label="Phone number" name="phone_number" onChange={handleChange} />
