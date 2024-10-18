@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -18,6 +18,7 @@ import pizzaIcon from '@/../public/assets/images/pizza-icon.png'; // Adjust the 
 
 const AdminDashboard = ({children}: { children: React.ReactNode }) => {
   const pathname= usePathname();
+  const router = useRouter();
 
   // Function to map route to title
   const getPageTitle = (path: string) => {
@@ -82,7 +83,7 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
 
         {/* Logout */}
         <div className="mt-auto p-4">
-          <div className="flex items-center text-red-500 space-x-2 p-3 rounded-lg mx-4">
+          <div className="flex items-center text-red-500 space-x-2 p-3 rounded-lg mx-4" onClick={() => {router.push('/register/login')}}>
             <LogoutIcon />
             <p>Logout</p>
           </div>
