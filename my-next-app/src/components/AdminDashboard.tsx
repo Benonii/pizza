@@ -63,7 +63,7 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
             }
           }}
       >
-        <div className="w-full bg-sidebarBg shadow-lg bg-white border border-red-600">
+        <div className="w-full bg-sidebarBg shadow-lg bg-white">
           <div className="flex justify-between items-center mt-4 mb-4 mx-1 bg-[#F3F3F340]">
             <h1 className="text-xl ml-2">Pizza</h1>
             <MenuOpenOutlinedIcon onClick={toggleDrawer(false)}/>

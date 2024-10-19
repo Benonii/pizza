@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from "@mui/material/IconButton";
 import AddUserModal from '@/components/AddUserModal';
-import ActiveRoleToggle from '@/components/ActiveRoleToggle';
+import ActiveUserToggle from '@/components/ActiveUserToggle';
 
 
 type User = {
@@ -34,7 +34,7 @@ function Page() {
       setLoading(true);
       try {
         // Make the fetch request
-        const response = await fetch(`/api/admins/?restaurantId=${restaurantId}`);
+        const response = await fetch(`/api/admins/?retaurantId=1`);
         
         // Check if the response is ok (status code 200-299)
         if (!response.ok) {
@@ -90,7 +90,7 @@ function Page() {
       header: 'Actions',
       accessorKey: 'actions',
       Cell: ({ row }: { row: { original: User }}) => (
-        <ActiveRoleToggle
+        <ActiveUserToggle
           status={true}
           onStatusChange={(newStatus: boolean) => {
             row.original.status = newStatus;
