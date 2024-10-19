@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Switch } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-
 
 interface ActiveRoleToggleProps {
     status: boolean
@@ -11,9 +9,6 @@ interface ActiveRoleToggleProps {
 }
 function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
     const [ checked, setChecked ] =useState(status);
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     }
@@ -53,12 +48,7 @@ function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
                 />
         </div>
 
-        <IconButton size="small" onClick={handleOpen}>
-            <VisibilityIcon sx={{
-              fontSize: 23,
-            }} fontSize="small" />
-        </IconButton>
-
+        
         <IconButton aria-label="delete">
             <DeleteIcon />
         </IconButton>
