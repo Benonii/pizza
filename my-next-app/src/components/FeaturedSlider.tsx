@@ -1,22 +1,22 @@
 import React, {useState, useEffect } from 'react';
 import Featured from './Featured';
-import pizzaImg1 from '@/../public/assets/images/pizza-1.png';
 import pizzaImg2 from '@/../public/assets/images/pizza-2.png';
 import pizzaImg3 from '@/../public/assets/images/pizza-3.png';
+import pizzaImg6 from '@/../public/assets/images/pizza-6.png';
 
 
 const cardData = [
     {
         bgColor: '#2F2F2F',
-        imgSrc: pizzaImg1,
-    },
-    {
-        bgColor: '#50482B',
         imgSrc: pizzaImg2,
     },
     {
-        bgColor: '#296D60',
+        bgColor: '#50482B',
         imgSrc: pizzaImg3,
+    },
+    {
+        bgColor: '#296D60',
+        imgSrc: pizzaImg6,
     },
 ]
 
