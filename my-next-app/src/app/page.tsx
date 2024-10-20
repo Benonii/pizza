@@ -79,22 +79,23 @@ export default function Home() {
       {/* Fasting Pizzas */}
       <section className="px-3 py-6 mt-20">
         <h3 className="text-gray3 text-xl md:text-2xl">Fasting pizzas</h3>
-        <div className=" ml-3 flex justify-start gap-4 overflow-x-auto">
+        <div className=" ml-3 flex justify-center gap-4 overflow-x-auto">
           {pizzas.length > 0 &&
             pizzas.map((pizza) => <Pizza key={pizza.id} pizza={pizza} />)}
         </div>
       </section>
 
       {/* Footer Links & Feedback */}
-      <div className="mt-10 bg-[#CCB691] flex flex-col md:flex-row p-4">
-        <div className="flex flex-col w-full md:w-[50vw] mb-6 md:mb-0">
-          <Link href="/" className="p-1 font-sans font-semibold">
+      <div className="mt-10 bg-[#CCB691] flex items-center md:flex-row p-4 h-44">
+
+        <div className="mt-5 flex md:block flex-col w-full md:w-[50vw] mb-6 md:mb-0">
+          <Link href="/" className="p-1 px-5 font-sans font-semibold">
             Home
           </Link>
-          <Link href="/history" className="p-1 font-sans font-semibold">
+          <Link href="/history" className="p-1 px-5 font-sans font-semibold">
             Order
           </Link>
-          <Link href="#" className="p-1 font-sans font-semibold">
+          <Link href="#" className="p-1 px-5 font-sans font-semibold">
             About us
           </Link>
         </div>
