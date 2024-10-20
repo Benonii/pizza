@@ -79,7 +79,8 @@ export default function Home() {
       {/* Fasting Pizzas */}
       <section className="px-3 py-6 mt-20">
         <h3 className="text-gray3 text-xl md:text-2xl">Fasting pizzas</h3>
-        <div className=" ml-3 flex justify-center gap-4 overflow-x-auto">
+        <div className="flex justify-center gap-4 overflow-x-auto">
+          <div className="h-50 w-0 border border-white mr-44"></div>
           {pizzas.length > 0 &&
             pizzas.map((pizza) => <Pizza key={pizza.id} pizza={pizza} />)}
         </div>
