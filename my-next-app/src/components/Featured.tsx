@@ -3,8 +3,6 @@ import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 
-import pizzaImg from '@/../public/assets/images/pizza-3.png';
-
 interface CardProps {
   // title: string;
   // description: string;

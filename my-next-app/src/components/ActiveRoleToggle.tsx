@@ -13,10 +13,11 @@ function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
     const [ checked, setChecked ] =useState(status);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     }
+
+    console.log(open);
   return (
     <div className='flex items-center space-x-1'>
         <div className={`flex items-center ${checked ? 'bg-green1 text-green3' : 'bg-gray-400 text-gray5'} rounded-full px-2 py-1`}>
