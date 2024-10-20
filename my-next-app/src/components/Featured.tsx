@@ -1,16 +1,28 @@
 import React from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 
 import pizzaImg from '@/../public/assets/images/pizza-3.png';
 
-function Featured() {
+interface CardProps {
+  // title: string;
+  // description: string;
+  // discount: string;
+  bgColor: string;
+  imgSrc: StaticImageData
+}
+
+function Featured({ bgColor, imgSrc }: CardProps) {
   const router = useRouter();
+
   return (
     <div className='mt-2'>
       <div className='flex justify-center font-sans'>
-        <div className="relative mx-2 flex rounded-xl bg-gray4 h-[350px]">
+        <div 
+          className={`relative mx-2 flex rounded-xl h-[350px]`}
+          style={{ backgroundColor: bgColor }}
+        >
             <div className="mt-7 mx-4 w-[60vw] lg:w-[40vw]">
                 <h2 className='text-xl md:text-2xl lg:text-3xl text-white font-bold'>
                     Make your first order and get <span className='text-orange3'>50% off</span>.
@@ -28,7 +40,7 @@ function Featured() {
                 >Order now</Button>
             </div>
             <div className='relative w-[32vw]'>
-                <Image src={pizzaImg} alt="A pizza" className='absolute right-0 h-full rounded-tr-md rounded-br-md' />
+                <Image src={imgSrc} alt="A pizza" className='absolute right-0 h-full rounded-tr-md rounded-br-md' />
             </div>
         </div>
       </div>
