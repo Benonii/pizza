@@ -3,8 +3,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import IconButton from "@mui/material/IconButton";
 import ActiveRoleToggle from '@/components/ActiveRoleToggle';
 import AddRoleModal from '@/components/AddRoleModal';
 
@@ -89,7 +87,7 @@ function Page() {
     };
 
     fetchRoles();  // Call the fetch function
-  }, [restaurantId]);
+  }, [restaurantId, data]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

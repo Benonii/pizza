@@ -3,8 +3,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import IconButton from "@mui/material/IconButton";
 import AddUserModal from '@/components/AddUserModal';
 import ActiveUserToggle from '@/components/ActiveUserToggle';
 
@@ -54,9 +52,9 @@ function Page() {
     };
 
     fetchUsers();  // Call the fetch function
-  }, []);
+  }, [data]);
 
-  console.log(loading);
+  console.log(loading, restaurantId);
 
   const columns = useMemo(() => [
     {
