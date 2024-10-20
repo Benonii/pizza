@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Featured from "@/components/Featured";
 import TopRestaurant from "@/components/TopRestaurant";
 import Pizza from "@/components/Pizza";
 import Link from "next/link";
@@ -13,6 +12,7 @@ import SendIcon from "@mui/icons-material/Send";
 import pizzaIcon from "@/../public/assets/images/pizza-icon.png";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
+import FeaturedSlider from "@/components/FeaturedSlider";
 
 type PizzaType = {
   id: number;
@@ -53,7 +53,7 @@ export default function Home() {
       {/* Featured Section */}
       <section className="px-3 py-6 mt-20">
         <h3 className="text-gray3 ml-1 text-2xl md:text-2xl lg:text-3xl">Featured pizzas</h3>
-        <Featured />
+        <FeaturedSlider />
       </section>
 
       {/* Top Restaurants */}
