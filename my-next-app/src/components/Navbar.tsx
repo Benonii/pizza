@@ -42,11 +42,11 @@ function Navbar() {
 
         
         <Button variant="contained" sx={{
-          backgroundColor: "#ff8100",
-          padding: 2,
-          marginRight: '-45px',
-          fontWeight: '700',
-        }}
+            backgroundColor: "#ff8100",
+            padding: 2,
+            marginRight: '-45px',
+            fontWeight: '700',
+          }}
         >
           <Link href='/register'>Register</Link>
         </Button>
@@ -65,6 +65,15 @@ function Navbar() {
               <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Orders</Link>
               <Link href="#" className={`${pathname === "/#" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Who we are</Link> 
             </div>
+            <Button variant="contained" sx={{
+                backgroundColor: "#ff8100",
+                padding: 2,
+                fontWeight: '700',
+              }}
+            >
+              <Link href='/register'>Register</Link>
+            </Button>
+
           </Drawer>
       </div>
 
