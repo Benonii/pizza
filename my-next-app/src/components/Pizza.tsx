@@ -52,7 +52,7 @@ function Pizza({ pizza }: PizzaProps ) {
                     fontFamily: 'font-sans',
                     fontWeight: '700',
                 }}
-                onClick={() => {router.push(`/order/?name=${pizza.name}`)}}>
+                onClick={() => {router.push(`/order/?name=${pizza.name}&price=${pizza.price}`)}}>
                 Order</Button>
         </div>
         <hr className='mx-5 mt-3'/>

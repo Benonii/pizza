@@ -8,11 +8,12 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'; // For a drop
 
 
 interface StatusDropdownProps {
+    id: number
     status: string
     onStatusChange: (newStatus: 'Preparing' | 'Ready' | 'Delivered') => void;
 }
 
-function StatusDropdown({ status }: StatusDropdownProps) {
+function StatusDropdown({ status, id }: StatusDropdownProps) {
     const [ anchorEl, setAnchorEl ] = useState<null | HTMLElement>(null);
     const [ currentStatus, setCurrentStatus ] = useState(status);
     const open = Boolean(anchorEl);
@@ -25,16 +26,36 @@ function StatusDropdown({ status }: StatusDropdownProps) {
         setAnchorEl(null);
     };
     
-    const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleStatusChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentStatus(event.target.value);
+        const res = await fetch('/api/orders/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                orderId: id,
+                status: event.target.value,
+            }),
+        })
+
+        const resJSON = await res.json();
+        if(!res.ok) {
+            console.error('Network Error!', resJSON);
+        }
         handleClose();
     };
+
+    const changeOrderStatus = async (id: number, status: typeof currentStatus) => {
+        
+    }
+
   return (
     <div>
         <div
             onClick={handleClick}
             className={`flex justify-between  ${
-                currentStatus=== 'Preparing' ? 'text-white bg-orange5' : currentStatus === 'Ready' ? 'text-white bg-green3': 'text-green3' 
+                currentStatus=== 'Preparing' || currentStatus === 'Ordered' ? 'text-white bg-orange5' : currentStatus === 'Ready' ? 'text-white bg-green3': 'text-green3' 
             }  text-lg font-medium px-4 py-2 rounded-lg`}
         >
             {currentStatus}

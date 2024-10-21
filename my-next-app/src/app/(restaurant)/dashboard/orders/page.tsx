@@ -17,67 +17,8 @@ type Order = {
     quantity: number;
     customerNumber: string;
     createdAt: string;
-    status: 'Preparing' | 'Ready' | 'Delivered';
+    status: 'Ordered' | 'Preparing' | 'Ready' | 'Delivered';
 }
-  
-// const data: Order[] = [
-//     {
-//         name: "Margherita",
-//         toppings: [
-//             "Mozzarella",
-//             "Tomato",
-//             "Bell Peppers",
-//             "Onions",
-//             "Olives"
-//         ],
-//         quantity: 3,
-//         customerNumber: "+2511523654789",
-//         createdAt: "2:44 PM 8/14/24",
-//         status: 'Preparing',
-//     },
-//     {
-//         name: "Margherita",
-//         toppings: [
-//             "Mozzarella",
-//             "Tomato",
-//             "Bell Peppers",
-//             "Onions",
-//             "Olives"
-//         ],
-//         quantity: 3,
-//         customerNumber: "+2511523654789",
-//         createdAt: "2:44 PM 8/14/24",
-//         status: 'Preparing',
-//     },
-//     {
-//         name: "Margherita",
-//         toppings: [
-//             "Mozzarella",
-//             "Tomato",
-//             "Bell Peppers",
-//             "Onions",
-//             "Olives"
-//         ],
-//         quantity: 3,
-//         customerNumber: "+2511523654789",
-//         createdAt: "2:44 PM 8/14/24",
-//         status: 'Preparing',
-//     },
-//     {
-//         name: "Margherita",
-//         toppings: [
-//             "Mozzarella",
-//             "Tomato",
-//             "Bell Peppers",
-//             "Onions",
-//             "Olives"
-//         ],
-//         quantity: 3,
-//         customerNumber: "+2511523654789",
-//         createdAt: "2:44 PM 8/14/24",
-//         status: 'Preparing',
-//     },
-// ]
 
 function Page() {
     const [ orders , setOrders ] = useState<Order[]>([]);
@@ -107,6 +48,7 @@ function Page() {
 
       getOrders();
     }, [restaurantId]);
+
     console.log("Orders", orders)
     const columns = useMemo(
         () => [
@@ -150,11 +92,25 @@ function Page() {
             {
                 header: 'Created at',
                 accessorKey: 'created_at',
-                Cell: ({ row }: {row: { original: Order}}) => (
-                    <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
-                        {row.original.createdAt}
-                    </Box>
-                ),
+                Cell: ({ row }: { row: { original: Order } }) => {
+                    const date = new Date(row.original.createdAt);
+                    
+                    // Format the date to "2:44 PM 8/14/24"
+                    const formattedDate = date.toLocaleString('en-US', {
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: true,
+                        month: 'numeric',
+                        day: 'numeric',
+                        year: '2-digit',
+                    });
+                    
+                    return (
+                        <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
+                            {formattedDate}
+                        </Box>
+                    );
+                }
             },
             {
                 header: 'Status',
@@ -162,7 +118,8 @@ function Page() {
                 Cell: ({ row }: {row: { original: Order}}) => (
                     <StatusDropdown 
                         status={row.original.status}
-                        onStatusChange={(newStatus: 'Preparing' | 'Ready' | 'Delivered') => {
+                        id={row.original.id}
+                        onStatusChange={(newStatus: "Ordered" | 'Preparing' | 'Ready' | 'Delivered') => {
                             row.original.status = newStatus;
                         }}
                     />

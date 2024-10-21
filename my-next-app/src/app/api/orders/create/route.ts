@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma'; // Assuming your Prisma client is set up here
+import { QueryBuilderSharp } from '@mui/icons-material';
 
 export async function POST(req: Request) {
   try {
-    const { user_id, restaurantId, status, toppings, quantity, price } = await req.json();
+    const { name, user_id, restaurantId, status, toppings,
+            quantity, price, customerNumber, createdAt } = await req.json();
 
     // Validate input data
     if (!user_id || !status) {
@@ -13,12 +15,15 @@ export async function POST(req: Request) {
     // Create the order in the database
     const newOrder = await prisma.order.create({
       data: {
+        name,
         user_id,
         restaurantId: Number(restaurantId), // This can be null if no restaurant is associated
         status,
         toppings,
-        quantity,
-        price: Number(price)
+        quantity: Number(quantity),
+        price: Number(price),
+        createdAt,
+        customerNumber,
       },
     });
 
