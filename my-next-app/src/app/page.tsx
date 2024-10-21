@@ -23,10 +23,15 @@ type PizzaType = {
 };
 
 export default function Home() {
-  const [pizzas, setPizzas] = useState<PizzaType[]>([]);
-  const storedUser = localStorage.getItem('user');
-  const user = storedUser ? JSON.parse(storedUser) : null;
+  const [ user, setUser ] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  });
 
+  const [pizzas, setPizzas] = useState<PizzaType[]>([]);
   useEffect(() => {
     const getPizzas = async () => {
       try {
@@ -44,8 +49,6 @@ export default function Home() {
 
     getPizzas();
   }, []);
-
-  console.log("Pizzas", pizzas);
 
   return (
     <div className="relative bg-background scroll-smooth">

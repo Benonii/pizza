@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, {useState, useEffect} from 'react';
 import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
@@ -13,6 +15,15 @@ interface CardProps {
 
 function Featured({ bgColor, imgSrc }: CardProps) {
   const router = useRouter();
+  const [ user, setUser ] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  });
+  const url = user ? `/order/?name=Margharita&price=150` : '/login';
+
 
   return (
     <div className='mt-2'>
@@ -34,7 +45,7 @@ function Featured({ bgColor, imgSrc }: CardProps) {
                     marginTop: 2,
                     padding: 2,
                   }}
-                  onClick={() => {router.push(`/order/?name=Margharita`)}}
+                  onClick={() => {router.push(url)}}
                 >Order now</Button>
             </div>
             <div className='relative w-[32vw]'>

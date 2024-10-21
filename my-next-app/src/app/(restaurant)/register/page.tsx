@@ -155,7 +155,7 @@ function Page() {
                     </Button>
                 </div>
 
-                <p className='text-center'>Already have an account? <span className='text-orange2 underline'><Link href="/login">Log in</Link></span></p>
+                <p className='text-center'>Already have an account? <span className='text-orange2 underline'><Link href="/register/login">Log in</Link></span></p>
             </form>
             
         </div>
