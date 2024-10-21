@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import OrderDetailsModal from '@/components/OrderDetailsModal';
 
@@ -11,6 +11,7 @@ import {
 import StatusDropdown from '@/components/StatusDropdown';
 
 type Order = {
+    id: number
     name: string;
     toppings: string[];
     quantity: number;
@@ -19,85 +20,94 @@ type Order = {
     status: 'Preparing' | 'Ready' | 'Delivered';
 }
   
-const data: Order[] = [
-    {
-        name: "Margherita",
-        toppings: [
-            "Mozzarella",
-            "Tomato",
-            "Bell Peppers",
-            "Onions",
-            "Olives"
-        ],
-        quantity: 3,
-        customerNumber: "+2511523654789",
-        createdAt: "2:44 PM 8/14/24",
-        status: 'Preparing',
-    },
-    {
-        name: "Margherita",
-        toppings: [
-            "Mozzarella",
-            "Tomato",
-            "Bell Peppers",
-            "Onions",
-            "Olives"
-        ],
-        quantity: 3,
-        customerNumber: "+2511523654789",
-        createdAt: "2:44 PM 8/14/24",
-        status: 'Preparing',
-    },
-    {
-        name: "Margherita",
-        toppings: [
-            "Mozzarella",
-            "Tomato",
-            "Bell Peppers",
-            "Onions",
-            "Olives"
-        ],
-        quantity: 3,
-        customerNumber: "+2511523654789",
-        createdAt: "2:44 PM 8/14/24",
-        status: 'Preparing',
-    },
-    {
-        name: "Margherita",
-        toppings: [
-            "Mozzarella",
-            "Tomato",
-            "Bell Peppers",
-            "Onions",
-            "Olives"
-        ],
-        quantity: 3,
-        customerNumber: "+2511523654789",
-        createdAt: "2:44 PM 8/14/24",
-        status: 'Preparing',
-    },
-]
+// const data: Order[] = [
+//     {
+//         name: "Margherita",
+//         toppings: [
+//             "Mozzarella",
+//             "Tomato",
+//             "Bell Peppers",
+//             "Onions",
+//             "Olives"
+//         ],
+//         quantity: 3,
+//         customerNumber: "+2511523654789",
+//         createdAt: "2:44 PM 8/14/24",
+//         status: 'Preparing',
+//     },
+//     {
+//         name: "Margherita",
+//         toppings: [
+//             "Mozzarella",
+//             "Tomato",
+//             "Bell Peppers",
+//             "Onions",
+//             "Olives"
+//         ],
+//         quantity: 3,
+//         customerNumber: "+2511523654789",
+//         createdAt: "2:44 PM 8/14/24",
+//         status: 'Preparing',
+//     },
+//     {
+//         name: "Margherita",
+//         toppings: [
+//             "Mozzarella",
+//             "Tomato",
+//             "Bell Peppers",
+//             "Onions",
+//             "Olives"
+//         ],
+//         quantity: 3,
+//         customerNumber: "+2511523654789",
+//         createdAt: "2:44 PM 8/14/24",
+//         status: 'Preparing',
+//     },
+//     {
+//         name: "Margherita",
+//         toppings: [
+//             "Mozzarella",
+//             "Tomato",
+//             "Bell Peppers",
+//             "Onions",
+//             "Olives"
+//         ],
+//         quantity: 3,
+//         customerNumber: "+2511523654789",
+//         createdAt: "2:44 PM 8/14/24",
+//         status: 'Preparing',
+//     },
+// ]
 
 function Page() {
-//   const [ orders , setOrders ] = useState<Order[]>([]);
+    const [ orders , setOrders ] = useState<Order[]>([]);
+    const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
 
-//   useEffect(() => {
-//     const getOrders = async () => {
-//       try {
-//         const response = await fetch('/api/orders');
-//         if (!response.ok) {
-//           throw new Error('Failed to fetch pizzas');
-//         }
-//         const orders = await response.json();
-//         setOrders(orders);
-//       } catch (error) {
-//         console.error('Error fetching pizzas:', error);
-//         return [];
-//       }
-//     };
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const storedRestaurantId = localStorage.getItem('restaurantId');
+        setRestaurantId(storedRestaurantId);
+      }
+    }, [restaurantId]);
 
-//     getOrders();
-//   }, []);
+    useEffect(() => {
+      const getOrders = async () => {
+        try {
+          const response = await fetch('/api/orders/');
+          if (!response.ok) {
+            throw new Error('Failed to fetch orders');
+          }
+          const orders = await response.json();
+          setOrders(orders);
+        } catch (error) {
+          console.error('Error fetching pizzas:', error);
+          setOrders([]);
+        }
+      };
+
+      getOrders();
+    }, [restaurantId]);
+    console.log("Orders", orders)
     const columns = useMemo(
         () => [
             {
@@ -156,21 +166,15 @@ function Page() {
                             row.original.status = newStatus;
                         }}
                     />
-                    // <Box sx={{ display: 'flex', gap: '2ch', alignItems: 'center' }}>
-                    //     {row.original.status}
-                    // </Box>
                 ),
             },
         ],
         [],
     );
     const table = useMaterialReactTable({
-        
         columns,
-        data,
+        data: orders ?? [],
         enableGlobalFilter: true,
-
-        
     });
   return (
     <div className='bg-white'>
