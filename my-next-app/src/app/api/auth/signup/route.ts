@@ -4,10 +4,10 @@ import bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
 
 export async function POST(request: Request) {
-    const { email, password,  location, phone_number } = await request.json();
+    const { email, password,  location, phoneNumber } = await request.json();
 
-    console.log("User:", email,  password, location, phone_number);
-    if (!email || !password || !location || !phone_number) {
+    console.log("User:", email,  password, location, phoneNumber);
+    if (!email || !password || !location || !phoneNumber) {
         return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
     }
 
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
                 email,
                 password: hashedPassword,
                 location,
-                phone_number,
+                phone_number: phoneNumber,
             } as Prisma.UserCreateInput
         });
 
