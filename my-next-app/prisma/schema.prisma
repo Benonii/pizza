@@ -34,7 +34,7 @@ model Menu {
 
 model Pizza {
   id           Int        @id @default(autoincrement())
-  name         String
+  name         String     @unique
   price        Decimal    @db.Decimal(10, 2)
   toppings     String[]
   vendor       Restaurant @relation("RestaurantPizzas", fields: [restaurantId], references: [id])
@@ -42,15 +42,18 @@ model Pizza {
 }
 
 model Order {
-  id           Int         @id @default(autoincrement())
-  user_id      Int
-  user         User        @relation(fields: [user_id], references: [id])
-  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
-  restaurantId Int?
-  status       String
-  toppings     String[]
-  quantity     Int
-  price        Decimal
+  name           String
+  toppings       String[]
+  quantity       Int
+  customerNumber String
+  createdAt      String
+  status         String
+  id             Int         @id @default(autoincrement())
+  user_id        Int
+  user           User        @relation(fields: [user_id], references: [id])
+  Restaurant     Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId   Int?
+  price          Decimal
 }
 
 model User {
