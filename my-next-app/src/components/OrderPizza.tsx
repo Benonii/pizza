@@ -16,9 +16,10 @@ import pizzaImg2 from '@/../public/assets/images/pizza-5.png';
 
 interface OrderPizzaProps {
     name: string
+    price: string
 }
 
-function OrderPizza({ name  }: OrderPizzaProps) {
+function OrderPizza({ name, price }: OrderPizzaProps) {
     const [ toppings, setToppings ] = React.useState<string[]>([]);
     const [ quantity, setQuantity ]  =  React.useState(0);
     const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
@@ -57,12 +58,15 @@ function OrderPizza({ name  }: OrderPizzaProps) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            name,
+            price,
             user_id: 1,
             restaurantId,
             status:"Ordered",
             toppings,
-            quantity: 1,
-            price: 150.0,
+            quantity,
+            customerNumber: "+123456789",
+            createdAt: new Date().toISOString(),
           }),
         })
     
@@ -154,7 +158,7 @@ function OrderPizza({ name  }: OrderPizzaProps) {
                          onClick={addQuantity}
                 />
 
-                <p className="text-green2 ml-5 text-3xl font-bold">150</p>
+                <p className="text-green2 ml-5 text-3xl font-bold">{price}</p>
                 <p className='align-top mb-3 ml-1'>Birr</p>
             </div>
             <div className="reltaive flex w-full justify-center items-center mt-5">
