@@ -38,7 +38,7 @@ function Pizza({ pizza }: PizzaProps ) {
 
         <div className="mx-5 mt-2 flex justify-between">
             <div className="flex">
-                <p className='text-2xl mr-1 text-[#01C550] font-semibold'>150</p>
+                <p className='text-2xl mr-1 text-[#01C550] font-semibold'>pizza.price</p>
                 <p className='text-sm'>Birr</p>
             </div>
 
