@@ -1,18 +1,49 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 import OrangeCheckbox from '@/components/OrangeCheckbox';
+
 function Page() {
   const label = { inputProps: { 'aria-label': 'Remomber me' } };
   const router = useRouter();
+
+  const [formData, setFormData ] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
+  }
+
+  const handleSubmit = async () => {
+    const res  = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'appilcation/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const resJSON = await res.json();
+    if (!res.ok) {
+      console.error('Error logging in', resJSON);   
+    } else {
+       localStorage.setItem('user', JSON.stringify(resJSON.user));
+       console.log('Log in successful', resJSON);
+       router.push('/');
+    }
+  }
   return (
     <div className='flex'>
         <div className="hidden w-[50vw] h-[900px] md:block">
@@ -30,11 +61,17 @@ function Page() {
             <form className="flex flex-col gap-3 mr-10">
 
                 <TextField
+                  name="email"
+                  value={formData.email}
                   label="Email address"
+                  onChange={handleChange}
                  />
                 <TextField
+                  name="password"
+                  value={formData.password}
                   type="password"
                   label="Password"
+                  onChange={handleChange}
                  />
                 <FormControlLabel
                     label="Remember me"
@@ -50,12 +87,13 @@ function Page() {
                         width: '100%',
                         fontWeight: '700',
                       }}
-                      onClick={() => {router.back()}}
+                      onClick={handleSubmit}
                       >
                         Login
                     </Button>
                 </div>
             </form>
+            <p className='text-center mt-5'>Don't have an account? <span className='text-orange2 underline'><Link href="/signup">Sign up</Link></span></p>
         </div>
       
     </div>

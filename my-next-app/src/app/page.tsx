@@ -24,6 +24,8 @@ type PizzaType = {
 
 export default function Home() {
   const [pizzas, setPizzas] = useState<PizzaType[]>([]);
+  const storedUser = localStorage.getItem('user');
+  const user = storedUser ? JSON.parse(storedUser) : null;
 
   useEffect(() => {
     const getPizzas = async () => {
@@ -94,7 +96,7 @@ export default function Home() {
           <Link href="/" className="p-1 px-5 font-sans font-semibold">
             Home
           </Link>
-          <Link href="/history" className="p-1 px-5 font-sans font-semibold">
+          <Link href={user ? `/history`: '/login'} className="p-1 px-5 font-sans font-semibold">
             Order
           </Link>
           <Link href="#" className="p-1 px-5 font-sans font-semibold">

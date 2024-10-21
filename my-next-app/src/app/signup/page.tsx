@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png'
@@ -16,7 +17,8 @@ function Page() {
     email: '',
     password: '',
     location: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    confirmPassword: '',
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -115,19 +117,21 @@ function Page() {
 
           <div className="mt-5 flex justify-center">
             <Button variant="contained" 
+            type='submit'
               sx={{
                 backgroundColor: '#FF8100',
                 width: '100%',
                 fontWeight: '700',
               }}
-              onClick={() => {router.push('/login')}}
             >
               Signup
             </Button>
           </div>
 
         </form>
+        <p className='text-center mt-5'>Already have an account? <span className='text-orange2 underline'><Link href="/login">Log in</Link></span></p>
       </div>
+
       
     </div>
   )

@@ -13,6 +13,7 @@ import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 
 function Navbar() {
   const [ open, setOpen ] = useState<boolean>(false);
+  const user = localStorage.getItem('user');
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown') {
@@ -37,7 +38,7 @@ function Navbar() {
 
       <div className='absolute right-5 md:flex justify-around items-center w-[500px] text-gray1 hidden'>
         <Link href="/" className={`${pathname === "/" ? "text-orange2" : ""} text-lg md:text-xl`}>Home</Link>
-        <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-lg md:text-xl`}>Orders</Link>
+        <Link href={user ? `/history`: '/login'} className={`${pathname === "/history" ? "text-orange2" : ""} text-lg md:text-xl`}>Orders</Link>
         <Link href="#" className={` ${pathname === "/#" ? "text-orange2" : ""} text-lg md:text-xl`}>Who we are</Link>
 
         
@@ -62,7 +63,7 @@ function Navbar() {
               className="flex flex-col justify-top items-center w-64 h-full shadow-lg mt-5 bg-custom-gradient" // Tailwind classes for styling
             >
               <Link href="/" className={`${pathname === "/" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Home</Link>
-              <Link href="/history" className={`${pathname === "/history" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Orders</Link>
+              <Link href={user ? `/history`: '/login'} className={`${pathname === "/history" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Orders</Link>
               <Link href="#" className={`${pathname === "/#" ? "text-orange2" : ""} text-xl md:text-2xl lg:text-3xl`}>Who we are</Link> 
             </div>
             <Button variant="contained" sx={{

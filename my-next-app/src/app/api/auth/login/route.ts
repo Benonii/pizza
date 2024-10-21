@@ -9,6 +9,7 @@ interface SignInRequest {
 
 export async function POST(request: Request) {
     const { email, password }: SignInRequest = await request.json();
+    console.log("Email:", email, "Password:", password)
 
     try {
         const user = await prisma.user.findUnique({
