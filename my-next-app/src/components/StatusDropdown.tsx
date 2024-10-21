@@ -46,10 +46,6 @@ function StatusDropdown({ status, id }: StatusDropdownProps) {
         handleClose();
     };
 
-    const changeOrderStatus = async (id: number, status: typeof currentStatus) => {
-        
-    }
-
   return (
     <div>
         <div

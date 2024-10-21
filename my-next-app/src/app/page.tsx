@@ -29,7 +29,7 @@ export default function Home() {
     if (storedUser) {
       setUser(JSON.parse(storedUser))
     }
-  });
+  }, []);
 
   const [pizzas, setPizzas] = useState<PizzaType[]>([]);
   useEffect(() => {

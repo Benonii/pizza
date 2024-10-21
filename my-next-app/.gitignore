@@ -37,3 +37,6 @@ next-env.d.ts
 
 #database setup
 /db_setup
+
+#/data folder
+my-next-app/data

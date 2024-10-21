@@ -10,7 +10,7 @@ export async function DELETE(request: Request) {
     }
 
     try {
-        const deletedRole = await prisma.role.delete({
+        await prisma.role.delete({
             where: { id: parseInt(roleId)},
         });
 

@@ -12,7 +12,7 @@ export async function DELETE(request: Request) {
     }
 
     try {
-        const deletedUser = await prisma.user.delete({
+        await prisma.user.delete({
             where: { id: parseInt(adminId)},
         });
 

@@ -21,7 +21,7 @@ function Featured({ bgColor, imgSrc }: CardProps) {
     if (storedUser) {
       setUser(JSON.parse(storedUser))
     }
-  });
+  }, []);
   const url = user ? `/order/?name=Margharita&price=150` : '/login';
 
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
 import ActiveRoleToggle from '@/components/ActiveRoleToggle';
@@ -63,7 +63,7 @@ function Page() {
     }
   }, [restaurantId]);
 
-  const fetchRoles = async () => {
+  const fetchRoles = useCallback(async () => {
     setLoading(true);
     try {
       // Make the fetch request
@@ -84,13 +84,14 @@ function Page() {
       setLoading(false); // Set loading to false
     }
     console.log("Roles:", data)
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restaurantId]);
   
   useEffect(() => {
     fetchRoles();  // Call the fetch function
-  }, [restaurantId]);
+  }, [restaurantId, fetchRoles]);
 
-  const deleteRole = async (id: number) => {
+  const deleteRole = useCallback(async (id: number) => {
     const res = await fetch('/api/roles/delete', {
       method: 'DELETE',
       headers: {
@@ -104,7 +105,7 @@ function Page() {
       console.error("Failed to delete Role", resJSON);
     }
     fetchRoles();
-  }
+  }, [fetchRoles]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -145,7 +146,7 @@ function Page() {
       ),
     },
   ],
-  [],
+  [deleteRole],
 );
 
 const table = useMaterialReactTable({
