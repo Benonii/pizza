@@ -21,6 +21,7 @@ interface PizzaProps {
 }
 function Pizza({ pizza }: PizzaProps ) {
     const router = useRouter();
+    console.log("Pizza:", pizza)
   return (
     <div className='relative flex flex-col mt-3 shadow-lg rounded-xl min-w-[340px] bg-white'>
         <div className='flex justify-center items-center h-56 mt-3'>
@@ -38,7 +39,7 @@ function Pizza({ pizza }: PizzaProps ) {
 
         <div className="mx-5 mt-2 flex justify-between">
             <div className="flex">
-                <p className='text-2xl mr-1 text-[#01C550] font-semibold'>pizza.price</p>
+                <p className='text-2xl mr-1 text-[#01C550] font-semibold'>{pizza.price}</p>
                 <p className='text-sm'>Birr</p>
             </div>
 

@@ -43,6 +43,8 @@ export default function Home() {
     getPizzas();
   }, []);
 
+  console.log("Pizzas", pizzas);
+
   return (
     <div className="relative bg-background scroll-smooth">
       <div className="bg-custom-gradient w-full">
