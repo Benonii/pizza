@@ -26,11 +26,12 @@ function Page() {
     setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const res  = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'appilcation/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     });
@@ -58,7 +59,7 @@ function Page() {
 
             <h1 className='font-sans text-2xl mt-5'>Login</h1>
             <hr className='mr-2 mt-1 mb-5'/>
-            <form className="flex flex-col gap-3 mr-10">
+            <form className="flex flex-col gap-3 mr-10" onSubmit={handleSubmit}>
 
                 <TextField
                   name="email"
@@ -81,14 +82,15 @@ function Page() {
                     className='font-sans'
                 />
                 <div className="mt-5 flex justify-center">
-                    <Button variant="contained" 
+                    <Button 
+                      variant="contained"
+                      type="submit"
                       sx={{
                         backgroundColor: '#FF8100',
                         width: '100%',
                         fontWeight: '700',
                       }}
-                      onClick={handleSubmit}
-                      >
+                    >
                         Login
                     </Button>
                 </div>

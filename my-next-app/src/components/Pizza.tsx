@@ -23,7 +23,7 @@ function Pizza({ pizza }: PizzaProps ) {
     const router = useRouter();
     const user = localStorage.getItem('user');
     const url = user ? `/order/?name=${pizza.name}&price=${pizza.price}` : '/login';
-    console.log("Pizza:", pizza)
+
   return (
     <div className='relative flex flex-col mt-3 shadow-lg rounded-xl min-w-[340px] bg-white'>
         <div className='flex justify-center items-center h-56 mt-3'>

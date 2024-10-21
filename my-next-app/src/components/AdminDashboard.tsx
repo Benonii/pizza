@@ -49,6 +49,11 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
 
   const pageTitle = getPageTitle(pathname);
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    router.push('/register/login');
+  }
+
   return (
     <div className="flex h-screen w-screen lg:w-screen">
       {/* Sidebar */}
@@ -113,7 +118,10 @@ const AdminDashboard = ({children}: { children: React.ReactNode }) => {
 
           {/* Logout */}
           <div className="mt-auto p-4">
-            <div className="flex items-center text-red-500 space-x-2 p-3 rounded-lg mx-4" onClick={() => {router.push('/register/login')}}>
+            <div 
+              aria-label="logout button"
+              className="flex items-center text-red-500 space-x-2 p-3 rounded-lg mx-4"
+              onClick={handleLogout}>
               <LogoutIcon />
               <p>Logout</p>
             </div>

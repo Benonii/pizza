@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,7 +13,13 @@ import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
 
 function Navbar() {
   const [ open, setOpen ] = useState<boolean>(false);
-  const user = localStorage.getItem('user');
+  const [ user, setUser ] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  });
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown') {
@@ -23,8 +29,6 @@ function Navbar() {
   };
   
   const pathname = usePathname();
-  console.log("Path:", pathname);
-
   return (
     <div className='relative flex justify-between mt-5 mx-3 h-20 font-sans'>
       <div className='flex items-center mr-12'>
