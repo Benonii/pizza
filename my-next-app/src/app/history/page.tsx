@@ -7,12 +7,15 @@ import React, { useState, useEffect } from 'react';
 
 type OrderType = {
   id: number;
-  price: string;
+  name: string;
+  price: string;  // You can use string or Decimal depending on how you handle price
   quantity: number;
-  restaurantId: number;
-  status: 'Ordered' | 'Delivered';
-  toppings: string[] | [];
+  restaurantId: number | null;  // It can be null since restaurantId is optional
+  status: 'Ordered' | 'Delivered' | 'Preparing' | 'Ready';  // Add other possible statuses from the model
+  toppings: string[];  // Array of strings, so no need for the empty array case
   user_id: number;
+  createdAt: string;  // createdAt is a string in the Prisma model
+  customerNumber: string;
 };
 
 function Page() {

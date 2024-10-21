@@ -4,19 +4,25 @@ import Image from 'next/image';
 import pizzaPic from '@/../public/assets/images/pizza-4.png';
 
 type OrderType = {
-    id: number
-    price: string
-    quantity: number
-    restaurantId: number
-    status: "Ordered" | "Delivered"
-    toppings: string[] | []
-    user_id: number
-}
+    id: number;
+    name: string;
+    price: string;  // You can use string or Decimal depending on how you handle price
+    quantity: number;
+    restaurantId: number | null;  // It can be null since restaurantId is optional
+    status: 'Ordered' | 'Delivered' | 'Preparing' | 'Ready';  // Add other possible statuses from the model
+    toppings: string[];  // Array of strings, so no need for the empty array case
+    user_id: number;
+    createdAt: string;  // createdAt is a string in the Prisma model
+    customerNumber: string;
+  };
 
 interface OrderProps {
     order: OrderType
 }
 function Order({ order }: OrderProps) {
+    if (order.status === "Preparing" || order.status === "Ready") {
+        order.status = "Ordered";
+    }
   return (
     <div className='relative flex flex-col mt-3 shadow-lg rounded-3xl min-w-[340px] bg-white'>
         <div className='flex justify-center items-center h-56 mt-3'>
