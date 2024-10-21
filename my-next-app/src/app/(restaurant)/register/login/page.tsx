@@ -93,7 +93,9 @@ function Page() {
                     </Button>
                 </div>
             </form>
-            <p className='text-center mt-5'>Don't have an account? <span className='text-orange2 underline'><Link href="/register">Sign up</Link></span></p>
+            <p
+              className='text-center mt-5'>
+                Don&apos;t have an account? <span className='text-orange2 underline'><Link href="/register">Sign up</Link></span></p>
         </div>
       
     </div>

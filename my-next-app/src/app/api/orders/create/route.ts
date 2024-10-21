@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma'; // Assuming your Prisma client is set up here
-import { QueryBuilderSharp } from '@mui/icons-material';
 
 export async function POST(req: Request) {
   try {

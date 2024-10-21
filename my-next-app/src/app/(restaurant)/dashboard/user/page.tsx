@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import Box from '@mui/material/Box';
 import AddUserModal from '@/components/AddUserModal';
@@ -28,7 +28,7 @@ function Page() {
     }
   }, []);
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
       // Make the fetch request
@@ -49,13 +49,14 @@ function Page() {
       setLoading(false); // Set loading to false
     }
     console.log("Roles:", data)
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restaurantId]);
 
   useEffect(() => {
     fetchUsers();  // Call the fetch function
-  }, []);
+  }, [fetchUsers]);
 
-  const deleteUser = async (id: number) => {
+  const deleteUser = useCallback(async (id: number) => {
     const res = await fetch('/api/admins/delete', {
       method: 'DELETE',
       headers: {
@@ -69,7 +70,7 @@ function Page() {
       console.error("Failed to delete Role", resJSON);
     }
     fetchUsers();
-  }
+  }, [fetchUsers]);
 
   console.log(loading, restaurantId);
 
@@ -116,7 +117,7 @@ function Page() {
       ),
     },
   ],
-  [],
+  [deleteUser],
 );
 
 const table = useMaterialReactTable({
