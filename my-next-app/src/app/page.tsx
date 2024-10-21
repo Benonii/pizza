@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative bg-background">
+    <div className="relative bg-background scroll-smooth">
       <div className="bg-custom-gradient w-full">
         <Navbar />
         <Hero />
@@ -57,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* Top Restaurants */}
-      <section className="px-3 py-6 mt-10">
+      <section className="px-3 py-6 mt-10 scroll-smooth">
         <h3 className="text-gray3 text-2xl md:text-2xl lg:text-3xl">Top Restaurants</h3>
         <div className="flex overflow-x-auto gap-4 bg-custom-gradient py-4">
           <TopRestaurant />
@@ -75,9 +75,8 @@ export default function Home() {
             pizzas.map((pizza) => <Pizza key={pizza.id} pizza={pizza} />)}
         </div>
       </section>
-
       {/* Fasting Pizzas */}
-      <section className="px-3 py-6 mt-20">
+      <section className="px-3 py-6 mt-20 scroll-smooth">
         <h3 className="text-gray3 text-xl md:text-2xl">Fasting pizzas</h3>
         <div className="flex justify-center gap-4 overflow-x-auto">
           <div className="h-50 w-0 border border-white mr-44"></div>

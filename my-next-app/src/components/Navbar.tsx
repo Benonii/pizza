@@ -44,7 +44,6 @@ function Navbar() {
         <Button variant="contained" sx={{
           backgroundColor: "#ff8100",
           padding: 2,
-          marginTop: 2,
           marginRight: '-45px',
           fontWeight: '700',
         }}
