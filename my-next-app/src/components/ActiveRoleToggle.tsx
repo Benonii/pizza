@@ -7,9 +7,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 interface ActiveRoleToggleProps {
     status: boolean
+    id: number
     onStatusChange: (newStatus: boolean) => void
+    handleDelete: (id: number) => void
 }
-function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
+function ActiveRoleToggle({ status, handleDelete, id }: ActiveRoleToggleProps) {
     const [ checked, setChecked ] =useState(status);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -60,8 +62,8 @@ function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
             }} fontSize="small" />
         </IconButton>
 
-        <IconButton aria-label="delete">
-            <DeleteIcon />
+        <IconButton aria-label="delete" onClick={() => handleDelete(id)}>
+            <DeleteIcon className='hover:text-red-500' />
         </IconButton>
     </div>
   )

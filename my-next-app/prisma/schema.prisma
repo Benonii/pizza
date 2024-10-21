@@ -10,7 +10,7 @@ datasource db {
 model Restaurant {
   id           Int      @id @default(autoincrement())
   admin_name   String
-  admin        User     @relation("RestaurantAdmin", fields: [adminId], references: [id])
+  admin        User     @relation("RestaurantAdmin", fields: [adminId], references: [id], onDelete: Cascade)
   adminId      Int
   name         String
   email        String
