@@ -13,7 +13,11 @@ type Permission = {
     subject: string 
 }
 
-function AddRoleModal() {
+interface AddRoleModalProps {
+  id: string
+}
+
+function AddRoleModal({ id }: AddRoleModalProps) {
     const style = {
       position: 'absolute',
       top: '50%',
@@ -66,13 +70,12 @@ function AddRoleModal() {
         //   name,
         //   permissions
         // }
-    
         const res = await fetch('/api/roles/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({name, actions: givenPermissions })
+          body: JSON.stringify({restaurantId: id, name, actions: givenPermissions })
         })
     
         const data = await res.json()

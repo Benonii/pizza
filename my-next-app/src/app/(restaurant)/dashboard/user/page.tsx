@@ -8,6 +8,7 @@ import ActiveUserToggle from '@/components/ActiveUserToggle';
 
 
 type User = {
+  id: number
   name: string
   phone_number: string
   email: string
@@ -27,32 +28,48 @@ function Page() {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
-      try {
-        // Make the fetch request
-        const response = await fetch(`/api/admins/?retaurantId=1`);
-        
-        // Check if the response is ok (status code 200-299)
-        if (!response.ok) {
-          throw new Error('Failed to fetch roles');
-        }
-
-        // Parse the JSON data
-        const data = await response.json();
-        console.log("Data:",data.users)
-        setData(data.users); // Set the roles state
-      } catch (err) {
-        console.log(err); // Set the error state
-      } finally {
-        setLoading(false); // Set loading to false
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      // Make the fetch request
+      const response = await fetch(`/api/admins/?restaurantId={restaurantId}`);
+      
+      // Check if the response is ok (status code 200-299)
+      if (!response.ok) {
+        throw new Error('Failed to fetch roles');
       }
-      console.log("Roles:", data)
-    };
 
+      // Parse the JSON data
+      const data = await response.json();
+      console.log("Data:",data.users)
+      setData(data.users); // Set the roles state
+    } catch (err) {
+      console.log(err); // Set the error state
+    } finally {
+      setLoading(false); // Set loading to false
+    }
+    console.log("Roles:", data)
+  };
+
+  useEffect(() => {
     fetchUsers();  // Call the fetch function
-  }, [data]);
+  }, []);
+
+  const deleteUser = async (id: number) => {
+    const res = await fetch('/api/admins/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id}),
+    })
+
+    const resJSON = await res.json();
+    if(!res.ok) {
+      console.error("Failed to delete Role", resJSON);
+    }
+    fetchUsers();
+  }
 
   console.log(loading, restaurantId);
 
@@ -90,6 +107,8 @@ function Page() {
       Cell: ({ row }: { row: { original: User }}) => (
         <ActiveUserToggle
           status={true}
+          id={row.original.id}
+          handleDelete={deleteUser}
           onStatusChange={(newStatus: boolean) => {
             row.original.status = newStatus;
           }}

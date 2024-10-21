@@ -7,6 +7,7 @@ import ActiveRoleToggle from '@/components/ActiveRoleToggle';
 import AddRoleModal from '@/components/AddRoleModal';
 
 type Role = {
+  id: number
   name: string
   created_at: string
   status: true | false
@@ -62,32 +63,48 @@ function Page() {
     }
   }, [restaurantId]);
 
-  useEffect(() => {
-    const fetchRoles = async () => {
-      setLoading(true);
-      try {
-        // Make the fetch request
-        const response = await fetch('/api/roles');
-        
-        // Check if the response is ok (status code 200-299)
-        if (!response.ok) {
-          throw new Error('Failed to fetch roles');
-        }
-
-        // Parse the JSON data
-        const data = await response.json();
-        console.log("Data:",data.roles)
-        setData(data.roles); // Set the roles state
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false); // Set loading to false
+  const fetchRoles = async () => {
+    setLoading(true);
+    try {
+      // Make the fetch request
+      const response = await fetch('/api/roles');
+      
+      // Check if the response is ok (status code 200-299)
+      if (!response.ok) {
+        throw new Error('Failed to fetch roles');
       }
-      console.log("Roles:", data)
-    };
 
+      // Parse the JSON data
+      const data = await response.json();
+      console.log("Data:",data.roles)
+      setData(data.roles); // Set the roles state
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false); // Set loading to false
+    }
+    console.log("Roles:", data)
+  };
+  
+  useEffect(() => {
     fetchRoles();  // Call the fetch function
-  }, [restaurantId, data]);
+  }, [restaurantId]);
+
+  const deleteRole = async (id: number) => {
+    const res = await fetch('/api/roles/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id}),
+    })
+
+    const resJSON = await res.json();
+    if(!res.ok) {
+      console.error("Failed to delete Role", resJSON);
+    }
+    fetchRoles();
+  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -119,6 +136,8 @@ function Page() {
       Cell: ({ row }: { row: { original: Role }}) => (
         <ActiveRoleToggle
           status={true}
+          id={row.original.id}
+          handleDelete={deleteRole}
           onStatusChange={(newStatus: boolean) => {
             row.original.status = newStatus;
           }}
@@ -140,7 +159,7 @@ console.log(loading);
   return (
     <div className="justify-between absolute  bg-white w-[90%]">
       {/* Add Role Button */}
-      <AddRoleModal />
+      <AddRoleModal id={restaurantId || ""}/>
       <MaterialReactTable table={table} />
     </div>
   )

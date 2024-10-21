@@ -5,9 +5,11 @@ import IconButton from '@mui/material/IconButton';
 
 interface ActiveRoleToggleProps {
     status: boolean
+    id: number
     onStatusChange: (newStatus: boolean) => void
+    handleDelete: (id: number) => void
 }
-function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
+function ActiveRoleToggle({ status, handleDelete, id }: ActiveRoleToggleProps) {
     const [ checked, setChecked ] =useState(status);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
@@ -49,8 +51,8 @@ function ActiveRoleToggle({ status }: ActiveRoleToggleProps) {
         </div>
 
         
-        <IconButton aria-label="delete">
-            <DeleteIcon />
+        <IconButton aria-label="delete" onClick={() => {handleDelete(id)}}>
+            <DeleteIcon className='hover:text-red-500'/>
         </IconButton>
     </div>
   )
