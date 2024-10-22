@@ -8,12 +8,14 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import pizzaBanner from '@/../public/assets/images/pizza-banner.jpg';
 import pizzaIcon from '@/../public/assets/images/pizza-icon.png';
+import { z } from 'zod';
 
 type Admin = {
   admin_name: string;
   email: string;
   phone_number: string;
   password: string;
+  confirm_password: string;
 };
 
 type Restaurant = {
@@ -33,6 +35,7 @@ function AddAdminForm() {
     email: '',
     phone_number: '',
     password: '',
+    confirm_password: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,9 +45,25 @@ function AddAdminForm() {
     }));
   };
 
-  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState("");
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
+  const [ errors, setErrors ] = useState<{[key: string]: string}>({});
+
+  const adminSchema = z.object({
+    admin_name: z.string().min(2, "Admin name too short"),
+    email: z.string().email(),
+    phone_number: z.string().min(10, 'Phone number too short').max(10, 'Phone number too long'),
+    password: z.string().regex(/[a-z]/, {message: "Password must contain at least one lowercase letter"})
+                        .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+                        .regex(/[0-9]/, { message: "Password must contain at least one number" })
+                        .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: "Password must contain at least one special character" })
+                        .min(8, 'Password must be at least 8 characters long'),
+    confirm_password: z.string(),
+  }).refine((data) => data.password === data.confirm_password, {
+    message: "Passwords do not match",
+    path: ["confirm_password"],
+  })
 
   const searchParams = useSearchParams();
   
@@ -61,7 +80,22 @@ function AddAdminForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(null);
+    const validation = adminSchema.safeParse(formData);
+    
+    if (!validation.success) {
+      console.log('Form is invalid:', validation.error.errors);
+
+      const errorMap: { [key: string]: string} = validation.error.errors.reduce((acc: any, error: any) => {
+        acc[error.path[0]] = error.message;
+        return acc;
+      }, {})
+
+      setErrors(errorMap);
+      return;
+    }
+
+    setErrors({});
+    setError("");
     setSuccess(null);
 
     if (!restaurant) {
@@ -127,18 +161,25 @@ function AddAdminForm() {
         {error && <p className="text-red-600">{error}</p>}
         {success && <p className="text-green-600">{success}</p>}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-[75%] mx-2">
-          <TextField label="Admin Name" name="admin_name" onChange={handleChange} />
-          <TextField label="Email address" name="email" onChange={handleChange} />
-          <TextField label="Phone number" name="phone_number" onChange={handleChange} />
+          {errors.admin_name && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.admin_name}</p>}
+          <TextField label="Admin Name" name="admin_name" value={formData.admin_name} onChange={handleChange} />
+          {errors.email && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.email}</p>}
+          <TextField label="Email address" name="email" value={formData.email} onChange={handleChange} />
+          {errors.phone_number && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.phone_number}</p>}
+          <TextField label="Phone number" name="phone_number" value={formData.phone_number} onChange={handleChange} />
+          {errors.password && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.password}</p>}
           <TextField
             label="Password"
             name="password"
+            value={formData.password}
             type="password"
             onChange={handleChange}
           />
+          {errors.confirm_password && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.confirm_password}</p>}
           <TextField
             label="Confirm Password"
             name="confirm_password"
+            value={formData.confirm_password}
             type="password"
             onChange={handleChange}
           />
