@@ -14,47 +14,10 @@ type Role = {
   actions: string[]
 }
 
-// const data: Role[] = [
-//   {
-//     name: "Kitchen Manager",
-//     createdAt: "8/14/24",
-//     actions: [
-//       "Update Order Status",
-//       "See Orders",
-//       "Add Users",
-//       "See Customers",
-//       "Create Roles"
-//     ]
-//   },
-//   {
-//     name: "Casher",
-//     createdAt: "8/14/24",
-//     actions: [
-//       "Update Order Status",
-//       "See Orders",
-//       "Add Users",
-//       "See Customers",
-//       "Create Roles"
-//     ]
-//   },
-//   {
-//     name: "Branch Manager",
-//     createdAt: "8/14/24",
-//     actions: [
-//       "Update Order Status",
-//       "See Orders",
-//       "Add Users",
-//       "See Customers",
-//       "Create Roles"
-//     ]
-//   }
-// ]
-
-
 function Page() {
   const [data, setData ] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
+  const [restaurantId, setRestaurantId] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
