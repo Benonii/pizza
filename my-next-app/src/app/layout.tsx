@@ -15,7 +15,7 @@ const geistMono = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Pizzaroo",
+  title: "Pizza Beno",
   description: "Get your Pizza wherever. Sell your Pizzas with ease",
 };
 

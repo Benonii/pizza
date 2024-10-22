@@ -1,17 +1,36 @@
-import { Ability, AbilityBuilder } from '@casl/ability';
-// import permissions from '@/constants/permissions.json';
+import { AbilityBuilder, MongoAbility, createMongoAbility } from "@casl/ability";
 
 type Action = 'create' | 'read' | 'update' | 'delete';
-type Subject = 'User' | 'Order' | 'Customer' | 'Role';
+type Subject = 'User' | 'Pizza' | 'Order' | 'Role';
 
-export type AppAbility = Ability<[Action, Subject]>;
+export type AppAbility = MongoAbility<[Action, Subject]>;
 
-export const defineAbilitiesFor = (permissions: Array<{ action: Action; subject: Subject}>): AppAbility => {
-    const { can, build } = new AbilityBuilder<AppAbility>(Ability) ;
+export const givePermissions = (permissions: string[]): AppAbility => {
+    const { can, cannot, build } = new AbilityBuilder<MongoAbility<[Action, Subject]>>(createMongoAbility);
 
-    permissions.forEach(({ action, subject }) => {
-        can(action, subject);
-    })
+    permissions.forEach(permission => {
+        switch(permission) {
+            case "UpdateOrderStatus":
+                can('update', 'Order')
+                break;
+            case "SeeOrders":
+                can('read', 'Order');
+                break;
+            case "AddUsers":
+                can('create', 'User');
+                break;
+            case "SeeCustomers":
+                can('read', 'User');
+                break;
+            case "CreateRoles":
+                can("create", 'Role')
+                break;
+            default:
+                break;
+        }
+    });
 
     return build();
 };
+
+export default givePermissions;
