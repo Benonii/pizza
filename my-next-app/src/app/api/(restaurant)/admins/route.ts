@@ -8,6 +8,9 @@ export async function GET(request: Request) {
     const users = await prisma.user.findMany({
       where: {
         restaurantId: Number(restaurantId),
+        name: {
+          not: ''
+        },
       },
       select: {
         id: true,

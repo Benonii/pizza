@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 // type Role = {
 //   name: string;
@@ -17,7 +18,9 @@ import { Prisma } from '@prisma/client';
 
 export async function POST(request: Request) {
   try {
-    const { name, email, location, phone_number, password, roleId,  } = await request.json();
+    const { name, email, location, phone_number, password, role,  } = await request.json();
+    console.log("Password", password);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Validate input
     if (!name || typeof name !== 'string') {
@@ -35,10 +38,8 @@ export async function POST(request: Request) {
         email,
         location,
         phone_number,
-        password,
-        role: {
-            connect: { id: Number(roleId)},
-        }
+        password: hashedPassword,
+        role,
       } as Prisma.UserCreateInput,
     });
 

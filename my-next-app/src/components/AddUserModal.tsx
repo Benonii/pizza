@@ -95,15 +95,13 @@ function AddUserModal() {
         e.preventDefault();
         setSuccess(null);
         setError(null);
-
-
     
         const res = await fetch('/api/admins/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({...formData, roleId: selectRole, restaurantId })
+          body: JSON.stringify({...formData, role: selectRole, restaurantId })
         })
     
         const data = await res.json()
@@ -114,8 +112,15 @@ function AddUserModal() {
             setError("Failed to create User");
           }
         } else {
-          console.log("Network error")
+          console.log("Network error", data);
         }
+        setFormData({
+          name: '',
+          email: '',
+          location: '',
+          phone_number: '',
+          password: '',
+        });
       }
 
       console.log(loading);
@@ -144,30 +149,36 @@ function AddUserModal() {
                   <TextField
                     label="Name"
                     name="name"
+                    value={formData.name}
                     onChange={handleChange}
                     className='w-[426px]'
                   />
                   <TextField
                     label="Email"
                     name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     className='w-[426px]'
                   />
                   <TextField
                     label="Location"
                     name="location"
+                    value={formData.location}
                     onChange={handleChange}
                     className='w-[426px]'
                   />
                   <TextField
                     label="Phone Number"
                     name="phone_number"
+                    value={formData.phone_number}
                     onChange={handleChange}
                     className='w-[426px]'
                   />
                   <TextField
                     label="Password"
                     name="password"
+                    type='password'
+                    value={formData.password}
                     onChange={handleChange}
                     className='w-[426px]'
                   />
@@ -185,7 +196,7 @@ function AddUserModal() {
                         {roles?.map((role: Role) => (
                             <MenuItem 
                                 key={role.id}
-                                value={role.id}
+                                value={role.name}
                             >{role.name}</MenuItem>
 
                         ))}
