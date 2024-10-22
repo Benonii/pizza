@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Switch } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import { z } from 'zod';
 
 interface ActiveRoleToggleProps {
     status: boolean
@@ -14,6 +15,7 @@ function ActiveRoleToggle({ status, handleDelete, id }: ActiveRoleToggleProps) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     }
+
   return (
     <div className='flex items-center space-x-1'>
         <div className={`flex items-center ${checked ? 'bg-green1 text-green3' : 'bg-gray-400 text-gray5'} rounded-full px-2 py-1`}>

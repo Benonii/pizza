@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { z } from 'zod';
 
 // type Permission = {
 //     name: string
@@ -50,6 +51,19 @@ function AddUserModal() {
     const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
     const [ selectRole, setSelectRole ] = React.useState<string | undefined>(undefined);
     const [roles, setRoles] = React.useState([]);
+    const [errors, setErrors] = React.useState<{[key: string]: string}>({});
+    
+    const adminSchema = z.object({
+      email: z.string().email(),
+      password: z.string().regex(/[a-z]/, {message: "Password must contain at least one lowercase letter"})
+                          .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+                          .regex(/[0-9]/, { message: "Password must contain at least one number" })
+                          .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: "Password must contain at least one special character" })
+                          .min(8, 'Password must be at least 8 characters long'),
+      name: z.string().min(2, 'Restaurant name too short'),
+      location: z.string().min(2, 'Location too short'),
+      phone_number: z.string().min(10, 'Phone number too short').max(10, 'Phone number too long'),
+    })
 
     const handleSelectRole = (event: SelectChangeEvent) => {
         setSelectRole(event.target.value as string);
@@ -95,6 +109,19 @@ function AddUserModal() {
         e.preventDefault();
         setSuccess(null);
         setError(null);
+        const validation = adminSchema.safeParse(formData);
+        if (!validation.success) {
+          console.log('Form is invalid:', validation.error.errors);
+    
+          const errorMap: { [key: string]: string} = validation.error.errors.reduce((acc: any, error: any) => {
+            acc[error.path[0]] = error.message;
+            return acc;
+          }, {})
+    
+          setErrors(errorMap);
+          return;
+        }
+        setErrors({});
     
         const res = await fetch('/api/admins/create', {
           method: 'POST',
@@ -123,7 +150,7 @@ function AddUserModal() {
         });
       }
 
-      console.log(loading);
+      // console.log(loading);
 
     return (
         <div className=''>
@@ -146,6 +173,7 @@ function AddUserModal() {
               <form onSubmit={handleSubmit} className='flex flex-col items-center relative w-full'>
                 <div className='flex flex-col gap-5 w-[100%] items-center'>
                   {/* <h1 className='font-sans text-2xl text-gray6 text-center mt-10 mb-5'>Add User</h1> */}
+                  {errors.name && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.name}</p>}
                   <TextField
                     label="Name"
                     name="name"
@@ -153,6 +181,7 @@ function AddUserModal() {
                     onChange={handleChange}
                     className='w-[426px]'
                   />
+                  {errors.email && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.email}</p>}
                   <TextField
                     label="Email"
                     name="email"
@@ -160,6 +189,7 @@ function AddUserModal() {
                     onChange={handleChange}
                     className='w-[426px]'
                   />
+                  {errors.location && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.location}</p>}
                   <TextField
                     label="Location"
                     name="location"
@@ -167,6 +197,7 @@ function AddUserModal() {
                     onChange={handleChange}
                     className='w-[426px]'
                   />
+                  {errors.phone_number && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.phone_number}</p>}
                   <TextField
                     label="Phone Number"
                     name="phone_number"
@@ -174,6 +205,7 @@ function AddUserModal() {
                     onChange={handleChange}
                     className='w-[426px]'
                   />
+                  {errors.password && <p className='text-red-500 text-sm mt-0 ml-2'>{errors.password}</p>}
                   <TextField
                     label="Password"
                     name="password"
@@ -209,6 +241,7 @@ function AddUserModal() {
                       paddingInline: 6
                     }}
                     className='bg-orange2 p-4 px-14'
+                    disabled={!selectRole}
                     >
                       Add
                     </Button>
