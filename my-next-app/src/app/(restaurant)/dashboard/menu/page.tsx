@@ -71,6 +71,8 @@ function Page() {
       setErrors(errorMap);
       return;
     }
+
+    setErrors({});
     setSuccess(null);
     setError(null);
 

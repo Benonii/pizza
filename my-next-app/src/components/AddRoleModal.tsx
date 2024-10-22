@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField, FormControlLabel } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import permissions from '@/constants/permissions.json';
 import OrangeCheckbox from './OrangeCheckbox';
+import { z } from 'zod';
 
 type Permission = {
     name: string
@@ -38,8 +39,10 @@ function AddRoleModal({ id }: AddRoleModalProps) {
     const [ error, setError ] = React.useState<string | null>(null);
     const [ success, setSuccess ] = React.useState<string | null>(null);
     const [ restaurandId, setRestaurantId ] = React.useState<string | null>(null);
-
+    const [errors, setErrors] = useState<{[name: string]: string}>({});
     const label = { inputProps: { 'aria-label': 'Permissions' } };
+
+    const roleNameSchema = z.string().min(2, 'Name too short');
 
 
     useEffect(() => {
@@ -65,11 +68,15 @@ function AddRoleModal({ id }: AddRoleModalProps) {
         e.preventDefault();
         setSuccess(null);
         setError(null);
+        const validation = roleNameSchema.safeParse(name);
+        if (!validation.success) {
+          console.log('Form is invalid:', validation.error.errors);
+    
+          setErrors({name: "Name is too short"});
+          return;
+        }
+        setErrors({});
 
-        // const role = {
-        //   name,
-        //   permissions
-        // }
         const res = await fetch('/api/roles/create', {
           method: 'POST',
           headers: {
@@ -112,6 +119,7 @@ function AddRoleModal({ id }: AddRoleModalProps) {
               <form onSubmit={handleSubmit} className='w-[90%]'>
                 <div>
                   <h1 className='font-sans text-2xl text-gray6 text-center mt-10 mb-5'>Add Role</h1>
+                  {errors.name && <p className='text-red-500 text-sm ml-2'>{errors.name}</p>}
                   <TextField
                     label="Name"
                     name="name"
