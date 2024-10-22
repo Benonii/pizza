@@ -4,6 +4,7 @@ import { Menu, MenuItem, Radio,
        } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'; // For a dropdown arrow
+import Button from '@mui/material/Button';
 
 
 
@@ -52,7 +53,7 @@ function StatusDropdown({ status, id }: StatusDropdownProps) {
             onClick={handleClick}
             className={`flex justify-between  ${
                 currentStatus=== 'Preparing' || currentStatus === 'Ordered' ? 'text-white bg-orange5' : currentStatus === 'Ready' ? 'text-white bg-green3': 'text-green3' 
-            }  text-lg font-medium px-4 py-2 rounded-lg`}
+            }  text-sm font-medium px-4 py-2 rounded-lg`}
         >
             {currentStatus}
             {currentStatus === 'Delivered' ? <CheckIcon /> : <ArrowDropDownIcon />}

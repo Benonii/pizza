@@ -3,12 +3,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Box } from '@mui/material';
 import OrderDetailsModal from '@/components/OrderDetailsModal';
-
 import {
     MaterialReactTable,
     useMaterialReactTable,
   } from 'material-react-table';
 import StatusDropdown from '@/components/StatusDropdown';
+import givePermissions, { AppAbility } from '@/lib/ability';
+import { createMongoAbility } from '@casl/ability';
 
 type Order = {
     id: number
@@ -22,8 +23,17 @@ type Order = {
 
 function Page() {
     const [ orders , setOrders ] = useState<Order[]>([]);
-    const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
+    const [ ability, setAbility ] = useState<AppAbility>();
 
+    const [ user, setUser ] = useState<any>(null);
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser))
+        }
+    }, []);
+
+    const [restaurantId, setRestaurantId] = React.useState<string | null>(null);
     useEffect(() => {
       if (typeof window !== 'undefined') {
         const storedRestaurantId = localStorage.getItem('restaurantId');
@@ -49,7 +59,30 @@ function Page() {
       getOrders();
     }, [restaurantId]);
 
-    console.log("Orders", orders)
+    const getPermissions = async () => {
+        const res = await fetch('/api/roles/permissions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: user?.role
+            })
+        })
+
+        const role = await res.json();
+        if (!res.ok) {
+            console.error('Network Error:', role);
+            return;
+        }
+        setAbility(givePermissions(role.permissions))
+    }
+    useEffect(() => {
+        getPermissions();
+    }, [user]);
+
+    // console.log("Abilities", ability?.rules);
+    // console.log("User role:", user?.role)
     const columns = useMemo(
         () => [
             {
@@ -123,8 +156,7 @@ function Page() {
                             row.original.status = newStatus;
                         }}
                     />
-                ),
-            },
+                )},
         ],
         [],
     );
@@ -139,6 +171,12 @@ function Page() {
             <MaterialReactTable
                 table={table} 
             />
+            {/* {ability?.can('read', 'Order') ? (
+                
+            ) : (
+                <p>You don't have permission to view orders</p>
+            )}
+             */}
         </div>
     </div>
     

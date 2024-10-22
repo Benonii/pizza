@@ -15,9 +15,11 @@ function Navbar() {
   const [ open, setOpen ] = useState<boolean>(false);
   const [ user, setUser ] = useState(null);
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
     }
   }, []);
 
@@ -32,7 +34,7 @@ function Navbar() {
   return (
     <div className='relative flex justify-between mt-5 mx-3 h-20 font-sans'>
       <div className='flex items-center mr-12'>
-        <Image src={pizzaIcon} alt='pizza slice icon' className='w-8 md:w-10 mr-1' />
+        <Image src={pizzaIcon} alt='pizza slice icon' className='w-8 md:w-10 mr-1 priority' />
         <h1 className='text-xl md:text-3xl text-orange1 font-semibold'>Pizza</h1>
       </div>
 
