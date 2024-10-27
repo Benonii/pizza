@@ -39,7 +39,7 @@ function Page() {
     if(!validation.success) {
       console.error("Form data is invalid:", validation.error.errors);
 
-      const errorMap: { [key: string]: string } = validation.error.errors.reduce((acc: any, error: any) => {
+      const errorMap: { [key: string]: string } = validation.error.errors.reduce((acc: any, error: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
         acc[error.path[0]] = error.message;
         return acc;
       }, {});
