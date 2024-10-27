@@ -9,6 +9,9 @@ import UploadButton from '@/components/UploadFile';
 import PizzaUploadedModal from '@/components/PizzaUploadedModal';
 import { z } from 'zod';
 
+
+
+
 function Page() {
   const [ formData, setFormData ] = useState({
     name: '',
@@ -63,10 +66,10 @@ function Page() {
     if (!validation.success) {
       console.log('Form is invalid:', validation.error.errors);
 
-      const errorMap: { [key: string]: string} = validation.error.errors.reduce((acc: any, error: any) => {
+      const errorMap: { [key: string]: string } = validation.error.errors.reduce((acc: any, error: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
         acc[error.path[0]] = error.message;
         return acc;
-      }, {})
+      } , {}) 
 
       setErrors(errorMap);
       return;

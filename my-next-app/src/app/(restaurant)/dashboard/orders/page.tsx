@@ -9,7 +9,6 @@ import {
   } from 'material-react-table';
 import StatusDropdown from '@/components/StatusDropdown';
 import givePermissions, { AppAbility } from '@/lib/ability';
-import { createMongoAbility } from '@casl/ability';
 
 type Order = {
     id: number
@@ -25,7 +24,7 @@ function Page() {
     const [ orders , setOrders ] = useState<Order[]>([]);
     const [ ability, setAbility ] = useState<AppAbility>();
 
-    const [ user, setUser ] = useState<any>(null);
+    const [ user, setUser ] = useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -79,9 +78,9 @@ function Page() {
     }
     useEffect(() => {
         getPermissions();
-    }, [user]);
+    }, [user, getPermissions]);
 
-    // console.log("Abilities", ability?.rules);
+    console.log("Abilities", ability?.rules);
     // console.log("User role:", user?.role)
     const columns = useMemo(
         () => [
