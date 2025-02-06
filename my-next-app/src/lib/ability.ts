@@ -8,7 +8,7 @@ export type AppAbility = MongoAbility<[Action, Subject]>;
 export const givePermissions = (permissions: string[]): AppAbility => {
     const { can, build } = new AbilityBuilder<MongoAbility<[Action, Subject]>>(createMongoAbility);
 
-    permissions.forEach(permission => {
+    permissions?.forEach(permission => {
         switch(permission) {
             case "UpdateOrderStatus":
                 can('update', 'Order')

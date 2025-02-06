@@ -15,7 +15,7 @@ type Role = {
 }
 
 function Page() {
-  const [data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [restaurantId, setRestaurantId] = useState<string | null>(null);
 
@@ -24,34 +24,28 @@ function Page() {
       const storedRestaurantId = localStorage.getItem('restaurantId');
       setRestaurantId(storedRestaurantId);
     }
-  }, [restaurantId]);
+  }, []);
 
   const fetchRoles = useCallback(async () => {
     setLoading(true);
     try {
-      // Make the fetch request
       const response = await fetch('/api/roles');
-      
-      // Check if the response is ok (status code 200-299)
       if (!response.ok) {
         throw new Error('Failed to fetch roles');
       }
-
-      // Parse the JSON data
       const data = await response.json();
-      console.log("Data:",data.roles)
-      setData(data.roles); // Set the roles state
+      setData(data.roles);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
-      setLoading(false); // Set loading to false
+      setLoading(false);
     }
-    console.log("Roles:", data)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [restaurantId]);
+  }, []);
   
   useEffect(() => {
-    fetchRoles();  // Call the fetch function
+    if (restaurantId) {
+      fetchRoles();
+    }
   }, [restaurantId, fetchRoles]);
 
   const deleteRole = useCallback(async (id: number) => {
@@ -68,7 +62,7 @@ function Page() {
       console.error("Failed to delete Role", resJSON);
     }
     fetchRoles();
-  }, [fetchRoles]);
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
